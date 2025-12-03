@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسبوع الأول - مقدمة في البرمجة وجافا | DINF-1303</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --text-color: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1;
+            padding-top: 120px; /* مساحة للأعلى بسبب الهيدر الثابت */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* الهيدر المعدل - أصغر حجماً وثابت */
+        .main-header {
+            background: linear-gradient(135deg, var(--primary-color), #1a2530);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: fixed; /* جعله ثابتًا */
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-content {
+            text-align: center;
+        }
+        
+        .header-content h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: white;
+        }
+        
+        .header-content p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .week-indicator {
+            background-color: var(--secondary-color);
+            color: white;
+            display: inline-block;
+            padding: 5px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* التنقل السريع */
+        .quick-nav {
+            background-color: white;
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 88px; /* يتناسب مع الهيدر الجديد */
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        /* المحتوى الرئيسي */
+        .main-content {
+            padding: 40px 0;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-right: 5px solid var(--secondary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-left: 20px;
+            flex-shrink: 0;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        /* محتوى القسم */
+        .section-content {
+            padding: 0 10px;
+        }
+        
+        .topic {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border-right: 3px solid #e0e0e0;
+        }
+        
+        .topic-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .topic-content {
+            color: #444;
+            font-size: 1.05rem;
+        }
+        
+        .topic-content ul {
+            padding-right: 25px;
+            margin: 15px 0;
+        }
+        
+        .topic-content li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .topic-content li:before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            position: absolute;
+            right: -20px;
+            font-size: 1.2rem;
+        }
+        
+        /* الأمثلة البرمجية */
+        .code-example {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-right: 4px solid var(--secondary-color);
+        }
+        
+        .code-example .keyword {
+            color: #63b3ed;
+        }
+        
+        .code-example .string {
+            color: #68d391;
+        }
+        
+        .code-example .comment {
+            color: #a0aec0;
+        }
+        
+        .code-example .function {
+            color: #fbb6ce;
+        }
+        
+        /* المهام والواجبات */
+        .assignments {
+            background-color: #e8f4fc;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .assignments h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+        
+        .task-list {
+            list-style-type: none;
+        }
+        
+        .task-list li {
+            background-color: white;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-right: 4px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .task-list li:before {
+            content: "✓";
+            background-color: var(--secondary-color);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* الفوتر */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .footer-item {
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .footer-item h4 {
+            margin-bottom: 10px;
+            color: #ecf0f1;
+            font-size: 1.1rem;
+        }
+        
+        .footer-item p {
+            color: #bdc3c7;
+        }
+        
+        /* التجاوب */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 110px;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .header-content h1 {
+                font-size: 1.5rem;
+            }
+            
+            .quick-nav {
+                top: 75px;
+                padding: 10px 0;
+            }
+            
+            .section {
+                padding: 25px 20px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .nav-links {
+                gap: 8px;
+            }
+            
+            .nav-links a {
+                padding: 5px 14px;
+                font-size: 0.85rem;
+            }
+            
+            .topic {
+                padding: 15px;
+            }
+        }
+        
+        /* تأثيرات إضافية */
+        .highlight {
+            background-color: #fff3cd;
+            padding: 3px 6px;
+            border-radius: 3px;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .definition {
+            background-color: #f8f9fa;
+            border-right: 4px solid #6c757d;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .definition strong {
+            color: var(--primary-color);
+        }
+        
+        .note {
+            background-color: #e8f5e9;
+            border-right: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning {
+            background-color: #ffebee;
+            border-right: 4px solid #f44336;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* تأثيرات الهيدر عند التمرير */
+        .main-header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .main-header.scrolled .header-content h1 {
+            font-size: 1.5rem;
+        }
+        
+        .main-header.scrolled .week-indicator {
+            padding: 4px 15px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر المعدل - أصغر حجماً وثابت -->
+    <header class="main-header" id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <h1>الأسبوع الأول: مقدمة في البرمجة وجافا</h1>
+                <p>مساق لغة برمجة جافا - DINF-1303 | قسم أمن المعلومات</p>
+                <div class="week-indicator">الأسبوع الأول من 12 أسبوع</div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- التنقل السريع -->
+    <nav class="quick-nav">
+        <div class="container">
+            <div class="nav-links">
+                <a href="#section1">مفاهيم أساسية</a>
+                <a href="#section2">مقدمة في جافا</a>
+                <a href="#section3">الأدوات والتثبيت</a>
+                <a href="#section4">هيكل البرنامج</a>
+                <a href="#section5">الطباعة والإخراج</a>
+                <a href="#section6">الأخطاء البرمجية</a>
+                <a href="#section7">الخوارزميات</a>
+                <a href="#assignments">الواجبات</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <div class="container">
+            <!-- القسم 1: مفاهيم أساسية في البرمجة -->
+            <section id="section1" class="section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">مفاهيم أساسية في البرمجة</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">المستخدم (User)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> المستخدم هو الشخص الذي يتفاعل مع الحاسوب أو البرنامج لأداء مهام معينة.
+                            </div>
+                            <ul>
+                                <li><strong>مستخدم عادي:</strong> يستخدم البرامج بشكل يومي لأداء مهام مختلفة</li>
+                                <li><strong>مطور (Developer):</strong> يكتب ويصمم البرمجيات والأنظمة</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">البرامج (Programs)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> مجموعة من التعليمات والأوامر التي ينفذها الحاسوب لتنفيذ مهام محددة.
+                            </div>
+                            <ul>
+                                <li><strong>برامج تطبيقية:</strong> مثل معالجات النصوص، برامج الرسوميات، المتصفحات</li>
+                                <li><strong>برامج نظام:</strong> مثل أنظمة التشغيل ومكونات النظام الأساسية</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">نظام التشغيل (Operating System)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> هو البرنامج الرئيسي الذي يدير مكونات الحاسوب ويوفر بيئة (حلقة الوصل) للمستخدمين والبرامج.
+                            </div>
+                            <ul>
+                                <li><strong>إدارة الموارد:</strong> مثل الذاكرة والمعالج ووحدات الإدخال والإخراج</li>
+                                <li><strong>توفير واجهة المستخدم:</strong> تسهيل التفاعل بين المستخدم والحاسوب</li>
+                                <li><strong>تشغيل البرامج:</strong> توفير البيئة المناسبة لتشغيل التطبيقات</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">مكونات الحاسوب الإلكترونية</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> مجموعة من القطع الإلكترونية المكونة لجهاز الحاسوب.
+                            </div>
+                            <ul>
+                                <li><strong>وحدة المعالجة المركزية (CPU):</strong> تعالج التعليمات وتقوم بالحسابات والعمليات المنطقية</li>
+                                <li><strong>الذاكرة (RAM):</strong> تخزن البيانات المؤقتة أثناء تشغيل البرامج</li>
+                                <li><strong>وحدة التخزين:</strong> مثل الأقراص الصلبة (HDD) أو الأقراص الصلبة الساكنة (SSD) لتخزين البيانات بشكل دائم</li>
+                                <li><strong>لوحة الأم (Motherboard):</strong> تربط جميع المكونات ببعضها</li>
+                                <li><strong>وحدات الإدخال والإخراج:</strong> مثل لوحة المفاتيح، الفأرة، الشاشة</li>
+                            </ul>
+                            <div class="note">
+                                <strong>العلاقة بين المكونات:</strong> المستخدم ← البرامج ← نظام التشغيل ← مكونات الحاسوب الإلكترونية
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 2: مقدمة في لغة جافا -->
+            <section id="section2" class="section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">مقدمة في لغة جافا</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">لغة البرمجة</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> هي لغة معينة من خلالها نستطيع التواصل مع نظام التشغيل وإبلاغه بالأوامر التي نريد تنفيذها.
+                            </div>
+                            <p>تعتبر لغة البرمجة وسيلة للتواصل بين الإنسان والحاسوب، حيث تترجم أفكارنا وتوجيهاتنا إلى لغة يفهمها الحاسوب وينفذها.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">لغة الجافا (Java)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> هي أحد لغات البرمجة التي من خلالها نستطيع كتابة برامج تعمل على سطح المكتب، كما ويمكن من خلالها كتابة برامج تعمل على الانترنت.
+                            </div>
+                            <ul>
+                                <li><strong>كائنية التوجه (OOP):</strong> تتعامل مع ما يسمى Object-Oriented Programming</li>
+                                <li><strong>الشعبية والانتشار:</strong> تعتبر واحدة من أكثر لغات البرمجة شعبية في العالم</li>
+                                <li><strong>المرونة والقوة:</strong> بفضل مرونتها وقوتها، وتستخدم في مجموعة واسعة من التطبيقات</li>
+                                <li><strong>الاستقلالية:</strong> "Write Once, Run Anywhere" - اكتب مرة واحدة وشغل في أي مكان</li>
+                            </ul>
+                            <div class="note">
+                                <strong>أبرز ما يميزها عن اللغات الأخرى:</strong> أنها كائنية التوجه أي أنها تتعامل مع ما يسمى OOP (سنفصله لاحقاً).
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">مجالات استخدام جافا</h3>
+                        <div class="topic-content">
+                            <ul>
+                                <li><strong>تطبيقات سطح المكتب:</strong> برامج تعمل على أنظمة Windows, macOS, Linux</li>
+                                <li><strong>تطبيقات الويب:</strong> مواقع وتطبيقات ويب ديناميكية</li>
+                                <li><strong>تطبيقات الهواتف الذكية:</strong> تطبيقات Android مبنية بلغة جافا</li>
+                                <li><strong>أنظمة المؤسسات:</strong> أنظمة البنوك والمستشفيات والشركات الكبيرة</li>
+                                <li><strong>الألعاب:</strong> بعض الألعاب الشهيرة مبنية بلغة جافا</li>
+                                <li><strong>أنظمة Embdedded:</strong> في الأجهزة الذكية والأنظمة المضمنة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 3: الأدوات والبرامج اللازمة -->
+            <section id="section3" class="section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">الأدوات والبرامج اللازمة</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">Java Development Kit (JDK)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>الوصف:</strong> منصة الجافا التي سنكتب بها الكود وهي عبارة عن مكتبة خاصة في لغة البرمجة تحتوي على جميع الأكواد المستخدمة في لغة الجافا ويجب تنزيلها مسبقا عند تنزيل البرامج.
+                            </div>
+                            <ul>
+                                <li><strong>المحتوى:</strong> يحتوي على المترجم (Compiler) والأدوات المساعدة</li>
+                                <li><strong>النسخة المطلوبة:</strong> Java SE (Standard Edition)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">بيئة تطوير متكاملة (IDE)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>الوصف:</strong> برنامج نكتب فيه الكود ونتتبعه ونصحح الأخطاء ونتنفذه.
+                            </div>
+                            <ul>
+                                <li><strong>NetBeans:</strong> IDE مفتوح المصدر بدعم تطوير جافا وتطبيقات الويب</li>
+                                <li><strong>Eclipse:</strong> بيئة تطوير شهيرة ومجانية</li>
+                                <li><strong>IntelliJ IDEA:</strong> بيئة تطوير متقدمة (نسخة مجانية Community)</li>
+                                <li><strong>VS Code:</strong> محرر نصوص خفيف مع إضافات لدعم جافا</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">تثبيت البرنامج (NetBeans)</h3>
+                        <div class="topic-content">
+                            <div class="warning">
+                                <strong>رابط التحميل:</strong> 
+                                <a href="https://t.me/SadeemLib/5851/7845" style="color: #d32f2f; text-decoration: underline;">
+                                    https://t.me/SadeemLib/5851/7845
+                                </a>
+                            </div>
+                            <p><strong>خطوات تحميل وتثبيت JDK وNetBeans على نظام ويندوز:</strong></p>
+                            <ul>
+                                <li>الدخول إلى الرابط أعلاه لتحميل الحزمة المتكاملة</li>
+                                <li>اختيار النسخة المناسبة لنظام التشغيل (Windows x64)</li>
+                                <li>تنزيل حزمة JDK مع NetBeans</li>
+                                <li>تشغيل ملف التثبيت واتباع التعليمات</li>
+                                <li>الموافقة على شروط الترخيص</li>
+                                <li>اختيار مسار التثبيت (يفضل تركه كما هو)</li>
+                                <li>الانتظار حتى انتهاء عملية التثبيت</li>
+                                <li>تشغيل NetBeans والتأكد من العمل بشكل صحيح</li>
+                            </ul>
+                            <div class="note">
+                                <strong>دليل تفصيلي:</strong> يمكن متابعة الخطوات الموضحة بالرسم من خلال الرابط التالي:
+                                <br>
+                                <a href="https://harmash.com/tutorials/java/environment-setup/download-and-install-jdk-and-netbeans" style="color: #2e7d32;">
+                                    https://harmash.com/tutorials/java/environment-setup/download-and-install-jdk-and-netbeans
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 4: هيكل البرنامج -->
+            <section id="section4" class="section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">هيكل البرنامج في جافا</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">خطوات إنشاء مشروع جديد في NetBeans</h3>
+                        <div class="topic-content">
+                            <ol>
+                                <li>فتح برنامج NetBeans</li>
+                                <li>النقر على أيقونة <span class="highlight">New Project</span> أو من القائمة File → New Project</li>
+                                <li>اختيار <span class="highlight">Java</span> ثم <span class="highlight">Java Application</span></li>
+                                <li>النقر على <span class="highlight">Next</span></li>
+                                <li>إدخال اسم المشروع (مثال: <span class="highlight">MyFirstProject</span>)</li>
+                                <li>تحديد مكان حفظ المشروع</li>
+                                <li>النقر على <span class="highlight">Finish</span></li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">الملاحظات (التعليقات)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> هو ملاحظة يكتبها المبرمج فوق الكود وهذه الملاحظة لا تؤثر إطلاقاً على الكود.
+                            </div>
+                            <div class="code-example">
+                                <span class="comment">// هذا تعليق على سطر واحد</span><br>
+                                <span class="comment">/*<br>
+                                &nbsp;&nbsp;هذا تعليق<br>
+                                &nbsp;&nbsp;على عدة أسطر<br>
+                                */</span><br><br>
+                                <span class="comment">/**<br>
+                                &nbsp;&nbsp;* هذا تعليق توثيقي<br>
+                                &nbsp;&nbsp;* يستخدم لتوثيق الكود<br>
+                                &nbsp;&nbsp;*/</span>
+                            </div>
+                            <div class="warning">
+                                <strong>ملاحظة:</strong> قم بمسح جميع التعليقات عند إنشاء أي مشروع جديد لأنك لست بحاجة إليها في البداية.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">الشكل العام لأي برنامج مكتوب بلغة جافا</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="keyword">public class</span> <span class="function">Test</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// هنا يجب أن تضع الأوامر التي ستتنفذ عند تشغيل البرنامج</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                            <div class="definition">
+                                <strong>ملاحظة:</strong> الكود الذي يتنفذ مباشرة عند تشغيل البرنامج هو الكود الذي نكتبه بداخل حدود الدالة (main).
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">حفظ التعديلات وتشغيل المشروع</h3>
+                        <div class="topic-content">
+                            <ul>
+                                <li><strong>حفظ التعديلات:</strong> اضغط على أيقونة الحفظ (💾) أو Ctrl+S لحفظ جميع التعديلات</li>
+                                <li><strong>تشغيل المشروع:</strong> اضغط على أيقونة التشغيل (▶️) أو F6 لتشغيل البرنامج</li>
+                                <li><strong>عرض النتائج:</strong> ستظهر نافذة جديدة في أسفل الشاشة تظهر فيها نتيجة تشغيل الكود</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">طريقة عمل برنامج مكتوب بلغة جافا</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>عملية الترجمة والتشغيل:</strong> الكود الذي تكتبه لا يعمل بشكل مباشر بل يمر بعدة مراحل:
+                            </div>
+                            <ol>
+                                <li><strong>Source Code (كود المصدر):</strong> الكود الذي تكتبه أنت (ملف .java)</li>
+                                <li><strong>Compiler (المترجم):</strong> يحول الكود إلى Byte Code (ملف .class)</li>
+                                <li><strong>JVM (Java Virtual Machine):</strong> المفسر الذي ينفذ الكود بشكل يتلاءم مع نظام التشغيل</li>
+                                <li><strong>OS (نظام التشغيل):</strong> Windows, Linux, MacOS</li>
+                            </ol>
+                            <div class="note">
+                                <strong>ميزة الاستقلالية:</strong> هذا المخطط يضمن أن الكود الذي كتبته يعمل على أي نظام تشغيل دون تعديل.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 5: الطباعة والإخراج -->
+            <section id="section5" class="section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">الطباعة والإخراج في جافا</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">تحليل برنامجك الأول: دالة main</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>دالة main:</strong> يحتوي كل تطبيق Java على كلاس فيه دالة main، وعند بدء تشغيل التطبيق، يتم تنفيذ التعليمات الموجودة في هذه الدالة الرئيسية.
+                            </div>
+                            <div class="code-example">
+                                <span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// الأوامر التي تنفذ عند تشغيل البرنامج</span><br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">الجمل البرمجية داخل main</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="function">System.out.println</span>(<span class="string">"Hello, World!"</span>);
+                            </div>
+                            <p>هذه الجملة تقوم بطباعة النص "Hello, World!" على الشاشة.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">استدعاء الدالة</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>استدعاء الدالة يتطلب:</strong>
+                            </div>
+                            <ol>
+                                <li><strong>اسم الدالة:</strong> التي نريد استدعائها (System.out.println)</li>
+                                <li><strong>القيم المدخلة (Arguments):</strong> القيم التي تستخدمها الدالة ("Hello, World")</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">النصوص في جافا</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>النص:</strong> هو مجموعة من الحروف يبدأ وينتهي بعلامة "الاقتباس المزدوج"
+                            </div>
+                            <div class="code-example">
+                                <span class="string">"Hello, World"</span> &nbsp;&nbsp;<span class="comment">// نص</span><br>
+                                <span class="string">"123"</span> &nbsp;&nbsp;<span class="comment">// نص وليس رقم</span><br>
+                                <span class="string">"مرحباً بك"</span> &nbsp;&nbsp;<span class="comment">// نص عربي</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">الطباعة: println vs print</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>System.out.println():</strong> تطبع القيمة ثم تبدأ سطر جديد
+                            </div>
+                            <div class="code-example">
+                                <span class="function">System.out.println</span>(<span class="string">"Hello"</span>);<br>
+                                <span class="function">System.out.println</span>(<span class="string">"World!"</span>);<br>
+                                <span class="comment">// الناتج:<br>// Hello<br>// World!</span>
+                            </div>
+                            
+                            <div class="definition" style="margin-top: 20px;">
+                                <strong>System.out.print():</strong> تطبع القيمة ولا تبدأ سطر جديد
+                            </div>
+                            <div class="code-example">
+                                <span class="function">System.out.print</span>(<span class="string">"Hello "</span>);<br>
+                                <span class="function">System.out.print</span>(<span class="string">"World!"</span>);<br>
+                                <span class="comment">// الناتج: Hello World!</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">طباعة الأرقام والحسابات</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="function">System.out.println</span>(<span class="string">"Welcome In Java"</span>); &nbsp;&nbsp;<span class="comment">// طباعة نص</span><br>
+                                <span class="function">System.out.println</span>(3 + 4); &nbsp;&nbsp;<span class="comment">// طباعة نتيجة حسابية: 7</span><br>
+                                <span class="function">System.out.println</span>(<span class="string">"5 + 3 = "</span> + (5 + 3)); &nbsp;&nbsp;<span class="comment">// دمج نص مع حساب</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">دراسات حالة عملية</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>Case Study #1: استخدام println</strong>
+                            </div>
+                            <div class="code-example">
+                                <span class="function">System.out.println</span>(<span class="string">"H"</span>);<br>
+                                <span class="function">System.out.println</span>(<span class="string">"e"</span>);<br>
+                                <span class="function">System.out.println</span>(<span class="string">"l"</span>);<br>
+                                <span class="function">System.out.println</span>(<span class="string">"l"</span>);<br>
+                                <span class="function">System.out.println</span>(<span class="string">"o"</span>);<br>
+                                <span class="comment">// الناتج: H e l l o (كل حرف في سطر)</span>
+                            </div>
+                            
+                            <div class="definition" style="margin-top: 20px;">
+                                <strong>Case Study #2: استخدام print</strong>
+                            </div>
+                            <div class="code-example">
+                                <span class="function">System.out.print</span>(<span class="string">"H"</span>);<br>
+                                <span class="function">System.out.print</span>(<span class="string">"e"</span>);<br>
+                                <span class="function">System.out.print</span>(<span class="string">"l"</span>);<br>
+                                <span class="function">System.out.print</span>(<span class="string">"l"</span>);<br>
+                                <span class="function">System.out.print</span>(<span class="string">"o"</span>);<br>
+                                <span class="comment">// الناتج: Hello (جميع الأحرف في سطر واحد)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">رسم أشكال باستخدام جمل الطباعة</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="function">System.out.println</span>(<span class="string">"   /\\   /\\   "</span>);<br>
+                                <span class="function">System.out.println</span>(<span class="string">"  ( ' ' )  "</span>);<br>
+                                <span class="function">System.out.println</span>(<span class="string">"  (  -  )  "</span>);<br>
+                                <span class="function">System.out.println</span>(<span class="string">"   |   |   "</span>);<br>
+                                <span class="function">System.out.println</span>(<span class="string">"  (__|__)  "</span>);<br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 6: الأخطاء البرمجية -->
+            <section id="section6" class="section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">الأخطاء البرمجية (Error)</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">أخطاء وقت الترجمة (Syntax Errors)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> تحدث هذه الأخطاء عندما يخطئ المبرمج في اتباع قواعد اللغة الصحيحة ويحدث أثناء ترجمة الكود بسبب الأخطاء الإملائية.
+                            </div>
+                            <div class="warning">
+                                <strong>تشمل الأخطاء التالية:</strong>
+                            </div>
+                            <ul>
+                                <li>نسيان الفاصلة المنقوطة (;)</li>
+                                <li>عدم إغلاق الأقواس ({ }, [ ], ( ))</li>
+                                <li>استخدام كلمات محجوزة بشكل خاطئ</li>
+                                <li>أخطاء في كتابة أسماء المتغيرات أو الدوال</li>
+                                <li>عدم إغلاق علامات الاقتباس (" ")</li>
+                            </ul>
+                            
+                            <div class="code-example">
+                                <span class="comment">// مثال على أخطاء تركيبية:</span><br>
+                                system.out.println(HELLO) &nbsp;&nbsp;<span class="comment">// خطأ</span><br><br>
+                                <span class="comment">// الأخطاء في المثال:</span><br>
+                                <span class="comment">// 1. حرف s صغير في System (يجب أن يكون كبير)</span><br>
+                                <span class="comment">// 2. نسيان الفاصلة المنقوطة في النهاية</span><br>
+                                <span class="comment">// 3. النص يجب أن يكون داخل علامات اقتباس</span><br><br>
+                                <span class="comment">// التصحيح:</span><br>
+                                <span class="function">System.out.println</span>(<span class="string">"HELLO"</span>);
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">الأخطاء المنطقية (Logical Errors)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> تحدث هذه الأخطاء عندما يكون البرنامج خاليا من الأخطاء التركيبية، ولكنه لا يعمل كما هو متوقع. قد تكون النتائج غير صحيحة بسبب منطق خاطئ في الشيفرة.
+                            </div>
+                            <div class="code-example">
+                                <span class="comment">// مثال: خطأ منطقي في عملية الحساب</span><br>
+                                <span class="function">System.out.println</span>(5 - 10); &nbsp;&nbsp;<span class="comment">// الناتج المتوقع: 15 لكن الناتج الفعلي: -5</span><br><br>
+                                <span class="comment">// التصحيح:</span><br>
+                                <span class="function">System.out.println</span>(5 + 10); &nbsp;&nbsp;<span class="comment">// الناتج: 15</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">أخطاء وقت التشغيل (Run-time Errors)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> تحدث هذه الأخطاء أثناء تنفيذ البرنامج، وغالباً ما تكون بسبب ظروف غير متوقعة من المبرمج.
+                            </div>
+                            <div class="code-example">
+                                <span class="comment">// مثال: قسمة على صفر</span><br>
+                                <span class="function">System.out.println</span>(5 / 0); &nbsp;&nbsp;<span class="comment">// خطأ: Division by zero</span><br><br>
+                                <span class="comment">// مثال: الوصول إلى عنصر غير موجود في مصفوفة</span><br>
+                                <span class="keyword">int</span>[] numbers = {1, 2, 3};<br>
+                                <span class="function">System.out.println</span>(numbers[5]); &nbsp;&nbsp;<span class="comment">// خطأ: ArrayIndexOutOfBounds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 7: الخوارزميات -->
+            <section id="section7" class="section">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <h2 class="section-title">الخوارزميات والتمثيل البياني</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">الخوارزميات (Algorithms)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> سلسلة من الخطوات المنطقية لحل مشكلة معينة بلغة يفهمها أي شخص.
+                            </div>
+                            <div class="note">
+                                <strong>خصائص الخوارزمية الجيدة:</strong>
+                            </div>
+                            <ul>
+                                <li><strong>واضحة:</strong> كل خطوة مفهومة ولا تحتمل أكثر من معنى</li>
+                                <li><strong>محددة:</strong> لها بداية ونهاية معروفة</li>
+                                <li><strong>قابلة للتنفيذ:</strong> يمكن تحويلها إلى برنامج</li>
+                                <li><strong>فعالة:</strong> تحل المشكلة بأقل وقت وجهد</li>
+                            </ul>
+                            
+                            <div class="definition" style="margin-top: 20px;">
+                                <strong>مثال: خوارزمية حساب مساحة المستطيل</strong>
+                            </div>
+                            <ol>
+                                <li>ابدأ</li>
+                                <li>أدخل قيمة الطول</li>
+                                <li>أدخل قيمة العرض</li>
+                                <li>احسب المساحة باستخدام المعادلة: المساحة = الطول × العرض</li>
+                                <li>اطبع المساحة</li>
+                                <li>انتهى</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">الكود الزائف (Pseudocode)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> هو تمثيل غير رسمي لخوارزمية، يُستخدم لتوضيح خطوات الحل بطريقة سهلة الفهم باستخدام الرموز التي تسهل على المبرمج كتابة ال Flow charts والآكواد.
+                            </div>
+                            <div class="note">
+                                <strong>أهمية Pseudocode:</strong>
+                            </div>
+                            <ul>
+                                <li><strong>سهولة الفهم:</strong> يمكن لأي شخص حتى لو لم يكن لديه خلفية برمجية فهم Pseudocode</li>
+                                <li><strong>تسريع عملية البرمجة:</strong> يساعد في تنظيم الأفكار قبل كتابة الكود الفعلي</li>
+                                <li><strong>تجنب الأخطاء:</strong> يتيح للمبرمجين التفكير في المنطق قبل التنفيذ</li>
+                            </ul>
+                            
+                            <div class="definition" style="margin-top: 20px;">
+                                <strong>مثال: Pseudocode لحساب مساحة المستطيل</strong>
+                            </div>
+                            <div class="code-example">
+                                ابدأ<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;تعريف الطول، العرض، المساحة كأرقام<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;اطبع "ادخل الطول: "<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;اقرأ الطول<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;اطبع "ادخل العرض: "<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;اقرأ العرض المساحة = الطول × العرض<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;اطبع "مساحة المستطيل هي: " المساحة<br>
+                                نهاية
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">المخططات الانسيابية (Flowcharts)</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> رسم بياني لتوضيح سير البرنامج ويكون تمثيل رسمي ل Pseudocode وله أشكال محددة لكل شكل معنى خاص فيه.
+                            </div>
+                            
+                            <div class="definition">
+                                <strong>الأشكال الهندسية المستخدمة:</strong>
+                            </div>
+                            <ul>
+                                <li><strong>الدائرة/بيضاوي:</strong> البداية والنهاية</li>
+                                <li><strong>متوازي الأضلاع:</strong> المدخلات والمخرجات</li>
+                                <li><strong>المستطيل:</strong> العمليات والمعالجات</li>
+                                <li><strong>المعين:</strong> اتخاذ القرار (الشروط)</li>
+                                <li><strong>السهم:</strong> اتجاه سير التنفيذ</li>
+                            </ul>
+                            
+                            <div class="definition" style="margin-top: 20px;">
+                                <strong>مثال: Flowchart لجمع رقمين</strong>
+                            </div>
+                            <div class="code-example">
+                                ابدأ<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;أدخل الرقم الأول (A)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;أدخل الرقم الثاني (B)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;C = A + B<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;اطبع C<br>
+                                انتهى
+                            </div>
+                            
+                            <div class="definition" style="margin-top: 20px;">
+                                <strong>مثال: Flowchart لمقارنة رقمين</strong>
+                            </div>
+                            <div class="code-example">
+                                ابدأ<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;أدخل A<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;أدخل B<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;إذا كان A > B<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;اطبع A<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;وإلا<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;اطبع B<br>
+                                انتهى
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">تمارين للدراسة الذاتية</h3>
+                        <div class="topic-content">
+                            <ol>
+                                <li>صمم خوارزمية لتحديد إذا كان الرقم موجباً أو سالباً</li>
+                                <li>صمم خوارزمية لحساب مساحة المستطيل</li>
+                                <li>صمم خوارزمية + Flowchart لتحديد إذا كان الرقم زوجياً أو فردياً</li>
+                                <li>صمم خوارزمية لحساب معدل طالب من 3 مواد</li>
+                                <li>صمم خوارزمية لتحويل درجة الحرارة من سيليزيوس إلى فهرنهايت</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- الواجبات -->
+            <section id="assignments" class="assignments">
+                <h3>الواجبات والتطبيقات العملية للأسبوع الأول</h3>
+                <ul class="task-list">
+                    <li>تثبيت JDK وNetBeans على حاسوبك الشخصي وتأكيد عملها بشكل صحيح</li>
+                    <li>إنشاء مشروع جديد في NetBeans باسم "Week1_Assignments"</li>
+                    <li>كتابة برنامج يطبع اسمك ورقمك الجامعي والقسم</li>
+                    <li>برنامج يرحب بالمستخدم ويطبع رسالة ترحيبية من تصميمك</li>
+                    <li>برنامج يقوم بطباعة شكل هندسي (مثل مثلث أو مربع) باستخدام النجوم (*)</li>
+                    <li>برنامج يحسب ناتج العمليات التالية ويطبع النتائج:
+                        <ul style="padding-right: 20px; margin-top: 10px;">
+                            <li>15 + 25</li>
+                            <li>50 - 30</li>
+                            <li>6 × 7</li>
+                            <li>100 ÷ 4</li>
+                        </ul>
+                    </li>
+                    <li>كتابة Pseudocode وFlowchart لبرنامج يحدد إذا كان العدد موجباً أو سالباً أو صفراً</li>
+                    <li>تصحيح الأخطاء في برنامج معطى يحتوي على أخطاء تركيبية ومنطقية</li>
+                    <li>إنشاء ملف PDF أو Word يوثق جميع مهامك مع لقطات شاشة للبرامج العاملة</li>
+                </ul>
+                
+                <div style="margin-top: 25px; padding: 15px; background-color: white; border-radius: 8px;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 10px;">موعد التسليم:</h4>
+                    <p>نهاية الأسبوع الأول - سيتم تحديد التاريخ الدقيق عبر منصة التعليم</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <h3>الأسبوع الأول - مقدمة في البرمجة وجافا</h3>
+			<br>
+            <p>مساق لغة برمجة جافا | DINF-1303 | 3 ساعات معتمدة</p>
+            
+            <div class="footer-info">
+                <div class="footer-item">
+                    <h4>اسم المدرس</h4>
+                    <p>م. محمود وليد الشيخ خليل</p>
+                </div>
+                
+                <div class="footer-item">
+                    <h4>البريد الإلكتروني</h4>
+                    <p>makhalil@ucas.edu.ps</p>
+                </div>
+                
+                <div class="footer-item">
+                    <h4>القسم</h4>
+                    <p>أمن المعلومات</p>
+                </div>
+                
+                <div class="footer-item">
+                    <h4>الكلية</h4>
+                    <p>الكلية الجامعية للعلوم التطبيقية</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 30px; color: #bdc3c7; font-size: 0.9rem;">
+                © 2025 - محتوى الأسبوع الأول مبني على المادة العلمية للمحاضر م. تامر اليازوري
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // تأثير التمرير على الهيدر
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // سكريبت للتنقل السلس
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 120,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // تأثيرات ظهور الأقسام
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                section.style.opacity = 0;
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
