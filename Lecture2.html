@@ -504,7 +504,7 @@
 		<div class="header-content">
 			<h1>الأسبوع الثاني: المتغيرات وأنواع البيانات في جافا</h1>
 			<p>مساق لغة برمجة جافا - DINF-1303 | قسم أمن المعلومات</p>
-			<div class="week-indicator">الأسبوع الثاني من 12 أسبو</div>
+			<div class="week-indicator">الأسبوع الثاني من 12 أسبوع</div>
 		</div>
 	</div>
 </header>
@@ -748,7 +748,10 @@
                         
                         <div class="code-example">
                             <span class="comment">// طرق مختلفة لإنشاء String</span><br>
-                            <span class="type">String</span> <span class="variable">name1</span> = <span class="string">"أحمد"</span>; <span class="comment">// الأكثر استخداماً</span><br>
+							
+							<span class="comment">// الأكثر استخداماً</span><br>
+                            <span class="type">String</span> <span class="variable">name1</span> = <span class="string">"أحمد"</span>;<br><br>
+							<span class="comment">// طريقة أخرى</span><br>
                             <span class="type">String</span> <span class="variable">name2</span> = <span class="keyword">new</span> <span class="type">String</span>(<span class="string">"محمد"</span>);<br>
                             <span class="type">String</span> <span class="variable">emptyString</span> = <span class="string">""</span>; <span class="comment">// سلسلة فارغة</span><br>
                             <span class="type">String</span> <span class="variable">fullName</span> = <span class="string">"أحمد محمد"</span>;<br><br>
@@ -776,7 +779,8 @@
                         <div class="code-example">
                             <span class="comment">// استخدام var لاستنتاج النوع تلقائياً</span><br>
                             <span class="keyword">var</span> <span class="variable">age</span> = <span class="string">25</span>; <span class="comment">// سيستنتج أن النوع int</span><br>
-                            <span class="keyword">var</span> <span class="variable">name</span> = <span class="string">"أحمد"</span>; <span class="comment">// سيستنتج أن النوع String</span><br>
+							<span class="comment">// سيستنتج أن النوع String</span><br>
+                            <span class="keyword">var</span> <span class="variable">name</span> = <span class="string">"أحمد"</span>;<br>
                             <span class="keyword">var</span> <span class="variable">salary</span> = <span class="string">1500.50</span>; <span class="comment">// سيستنتج أن النوع double</span><br>
                             <span class="keyword">var</span> <span class="variable">isStudent</span> = <span class="keyword">true</span>; <span class="comment">// سيستنتج أن النوع boolean</span><br><br>
                             
