@@ -4,34 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خطة مساق لغة برمجة جافا - DINF-1303</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #27ae60;
-            --light-color: #ecf0f1;
-            --text-color: #333;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f9f9f9;
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
+        /* الأنماط الخاصة بصفحة خطة المساق - غير مشتركة مع الدروس */
         header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
@@ -118,6 +93,8 @@
             border-radius: 4px;
             font-weight: bold;
             font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
         }
         
         .week-content {
@@ -180,6 +157,7 @@
         .grading-table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
         
         .grading-table th, .grading-table td {
@@ -205,6 +183,38 @@
         
         .resources-list li:before {
             content: "📚";
+            position: absolute;
+            right: 0;
+        }
+        
+        .policy-list {
+            list-style-type: none;
+        }
+        
+        .policy-list li {
+            margin-bottom: 12px;
+            padding-right: 25px;
+            position: relative;
+        }
+        
+        .policy-list li:before {
+            content: "📋";
+            position: absolute;
+            right: 0;
+        }
+        
+        .notes-list {
+            list-style-type: none;
+        }
+        
+        .notes-list li {
+            margin-bottom: 12px;
+            padding-right: 25px;
+            position: relative;
+        }
+        
+        .notes-list li:before {
+            content: "💡";
             position: absolute;
             right: 0;
         }
@@ -759,13 +769,13 @@
                         <li>منصة Codecademy لدورات جافا</li>
                         <li>قناة "مبرمج" على يوتيوب</li>
                         <li>منتدى Java Arabic Community</li>
-                        <li>مصادر إضافية من المدرس</li>
+                        <li>محاضرات م. تامر اليازوري</li>
                     </ul>
                 </section>
                 
                 <section class="sidebar-section">
                     <h3>سياسات المساق</h3>
-                    <ul class="resources-list">
+                    <ul class="policy-list">
                         <li>موعد تسليم الواجبات: كل يوم خميس</li>
                         <li>يسمح بالتأخير 48 ساعة مع خصم 20%</li>
                         <li>يجب أن يكون العمل فردياً</li>
@@ -777,7 +787,7 @@
                 
                 <section class="sidebar-section">
                     <h3>ملاحظات هامة</h3>
-                    <ul class="resources-list">
+                    <ul class="notes-list">
                         <li>المساق معد لمستوى طلاب الدبلوم</li>
                         <li>التركيز على التطبيق العملي في كل أسبوع</li>
                         <li>المشروع النهائي يجمع كل المفاهيم</li>
@@ -791,8 +801,7 @@
 
     <footer>
         <div class="container">
-            <p>كلية الجامعة الجامعية للعلوم التطبيقية - قسم أمن المعلومات &copy; 2025</p>
-            <p>تم إعداد المحتوى التعليمي بالاستعانة بمحاضرات م. تامر اليازوري</p>
+            <p>الكلية الجامعية للعلوم التطبيقية - قسم أمن المعلومات &copy; 2025</p>
         </div>
     </footer>
 </body>
