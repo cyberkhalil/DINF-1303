@@ -33,7 +33,7 @@
         }
         
         .flow-content {
-            text-align: right;
+            text-align: center;
             direction: rtl;
         }
         
@@ -158,7 +158,7 @@
             border-color: #f44336;
         }
         
-        /* أنماط الجداول الخاصة بالمشغلات */
+        /* أنماط الجداول الخاصة بالشروط */
         .operator-table {
             width: 100%;
             border-collapse: collapse;
@@ -259,8 +259,8 @@
                 <a href="#section1">مقدمة في هياكل التحكم</a>
                 <a href="#section2">جملة if البسيطة</a>
                 <a href="#section3">جملة if-else</a>
-                <a href="#section4">المشغلات المنطقية</a>
-                <a href="#section5">المشغلات المقارنة</a>
+                <a href="#section4">الشروط المنطقية</a>
+                <a href="#section5">الشروط المقارنة</a>
                 <a href="#section6">التطبيقات العملية</a>
                 <a href="#assignments">الواجبات</a>
             </div>
@@ -413,17 +413,17 @@
                                 
                                 <div class="flow-card">
                                     <div class="flow-title">أمثلة عملية لجملة if</div>
-                                    <div class="code-example" style="background-color: white; color: #333; text-align: right; direction: rtl;">
-                                        <span class="comment">// مثال 1: التحقق من العمر</span><br>
-                                        <span class="type">int</span> <span class="variable">age</span> = <span class="string">20</span>;<br>
-                                        <span class="keyword">if</span> (<span class="variable">age</span> >= <span class="string">18</span>) {<br>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"أنت بالغ"</span>);<br>
+                                    <div class="code-example" style="background-color: white; color: #333">
+                                        <span class="comment">// مثال 1: التحقق من النجاح في مادة</span><br>
+                                        <span class="type">int</span> <span class="variable">score</span> = <span class="string">75</span>;<br>
+                                        <span class="keyword">if</span> (<span class="variable">score</span> >= <span class="string">50</span>) {<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"مبروك! لقد نجحت في المادة"</span>);<br>
                                         }<br><br>
                                         
-                                        <span class="comment">// مثال 2: التحقق من درجة الطالب</span><br>
-                                        <span class="type">int</span> <span class="variable">score</span> = <span class="string">85</span>;<br>
-                                        <span class="keyword">if</span> (<span class="variable">score</span> >= <span class="string">50</span>) {<br>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"ناجح"</span>);<br>
+                                        <span class="comment">// مثال 2: التحقق من إتمام المهمة</span><br>
+                                        <span class="type">boolean</span> <span class="variable">taskCompleted</span> = <span class="keyword">true</span>;<br>
+                                        <span class="keyword">if</span> (<span class="variable">taskCompleted</span>) {<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"تم إتمام المهمة بنجاح"</span>);<br>
                                         }
                                     </div>
                                 </div>
@@ -440,18 +440,18 @@
                             
                             <div class="code-example">
                                 <span class="comment">// الطريقة الأولى: مع أقواس معقوفة</span><br>
-                                <span class="keyword">if</span> (<span class="variable">age</span> >= <span class="string">18</span>) {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"أنت بالغ"</span>);<br>
+                                <span class="keyword">if</span> (<span class="variable">score</span> >= <span class="string">50</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"مبروك! لقد نجحت في المادة"</span>);<br>
                                 }<br><br>
                                 
                                 <span class="comment">// الطريقة الثانية: بدون أقواس معقوفة (لتعليمة واحدة فقط)</span><br>
-                                <span class="keyword">if</span> (<span class="variable">age</span> >= <span class="string">18</span>)<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"أنت بالغ"</span>);<br><br>
+                                <span class="keyword">if</span> (<span class="variable">score</span> >= <span class="string">50</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"مبروك! لقد نجحت في المادة"</span>);<br><br>
                                 
                                 <span class="comment">// هذا سيعطي خطأ</span><br>
-                                <span class="keyword">if</span> (<span class="variable">age</span> >= <span class="string">18</span>)<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"أنت بالغ"</span>);<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"مرحباً"</span>); <span class="comment">// هذه الجملة ستنفذ دائماً</span>
+                                <span class="keyword">if</span> (<span class="variable">score</span> >= <span class="string">50</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"مبروك! لقد نجحت في المادة"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"يمكنك الانتقال للمستوى التالي"</span>); <span class="comment">// هذه الجملة ستنفذ دائماً</span>
                             </div>
                             
                             <div class="warning">
@@ -461,24 +461,24 @@
                     </div>
                     
                     <div class="topic">
-                        <h3 class="topic-title">مثال تطبيقي: تحديد العمر القانوني للتصويت</h3>
+                        <h3 class="topic-title">مثال تطبيقي: تحديد فئة المستخدم بناءً على عدد المشتريات</h3>
                         <div class="topic-content">
                             <div class="code-example">
                                 <span class="keyword">import</span> java.util.Scanner;<br><br>
                                 
-                                <span class="keyword">public class</span> <span class="function">VotingAge</span> {<br>
+                                <span class="keyword">public class</span> <span class="function">UserCategory</span> {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br><br>
                                 
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print(<span class="string">"أدخل عمرك: "</span>);<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">age</span> = <span class="variable">scanner</span>.nextInt();<br><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print(<span class="string">"أدخل عدد مشترياتك الشهرية: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">purchases</span> = <span class="variable">scanner</span>.nextInt();<br><br>
                                 
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">age</span> >= <span class="string">18</span>) {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"يمكنك التصويت في الانتخابات."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">purchases</span> >= <span class="string">10</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"أنت عضو متميز! تحصل على خصم 20%"</span>);<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
                                 
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">age</span> < <span class="string">18</span>) {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"لا يمكنك التصويت بعد."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">purchases</span> < <span class="string">10</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"أنت عضو عادي. احصل على 5 مشتريات أخرى لتصبح متميزاً"</span>);<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
                                 
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">scanner</span>.close();<br>
@@ -546,22 +546,22 @@
                     </div>
                     
                     <div class="topic">
-                        <h3 class="topic-title">تحسين مثال التصويت باستخدام if-else</h3>
+                        <h3 class="topic-title">تحسين مثال فئة المستخدم باستخدام if-else</h3>
                         <div class="topic-content">
                             <div class="code-example">
                                 <span class="keyword">import</span> java.util.Scanner;<br><br>
                                 
-                                <span class="keyword">public class</span> <span class="function">VotingAgeImproved</span> {<br>
+                                <span class="keyword">public class</span> <span class="function">UserCategoryImproved</span> {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br><br>
                                 
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print(<span class="string">"أدخل عمرك: "</span>);<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">age</span> = <span class="variable">scanner</span>.nextInt();<br><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print(<span class="string">"أدخل عدد مشترياتك الشهرية: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">purchases</span> = <span class="variable">scanner</span>.nextInt();<br><br>
                                 
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">age</span> >= <span class="string">18</span>) {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"يمكنك التصويت في الانتخابات."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">purchases</span> >= <span class="string">10</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"أنت عضو متميز! تحصل على خصم 20%"</span>);<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"لا يمكنك التصويت بعد."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"أنت عضو عادي. احصل على 5 مشتريات أخرى لتصبح متميزاً"</span>);<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
                                 
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">scanner</span>.close();<br>
@@ -612,18 +612,18 @@
                 </div>
             </section>
             
-            <!-- القسم 4: المشغلات المنطقية -->
+            <!-- القسم 4: الشروط المنطقية -->
             <section id="section4" class="section">
                 <div class="section-header">
                     <div class="section-number">4</div>
-                    <h2 class="section-title">المشغلات المنطقية (&&, ||, !)</h2>
+                    <h2 class="section-title">الشروط المنطقية (&&, ||, !)</h2>
                 </div>
                 <div class="section-content">
                     <div class="topic">
-                        <h3 class="topic-title">المشغل المنطقي AND (&&)</h3>
+                        <h3 class="topic-title">الشرط المنطقي AND (&&)</h3>
                         <div class="topic-content">
                             <div class="definition">
-                                <strong>المشغل && (AND - و):</strong> يعيد true فقط إذا كان كلا الشرطين صحيحين.
+                                <strong>الشرط && (AND - و):</strong> يعيد true فقط إذا كان كلا الشرطين صحيحين.
                             </div>
                             
                             <table class="operator-table">
@@ -665,28 +665,29 @@
                             
                             <div class="code-example">
                                 <span class="comment">// أمثلة على استخدام &&</span><br>
-                                <span class="type">int</span> <span class="variable">age</span> = <span class="string">25</span>;<br>
-                                <span class="type">boolean</span> <span class="variable">hasLicense</span> = <span class="keyword">true</span>;<br><br>
+                                <span class="type">int</span> <span class="variable">temperature</span> = <span class="string">25</span>;<br>
+                                <span class="type">boolean</span> <span class="variable">isSunny</span> = <span class="keyword">true</span>;<br><br>
                                 
-                                <span class="keyword">if</span> (<span class="variable">age</span> >= <span class="string">18</span> && <span class="variable">hasLicense</span>) {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"يمكنك قيادة السيارة"</span>);<br>
+                                <span class="keyword">if</span> (<span class="variable">temperature</span> >= <span class="string">20</span> && <span class="variable">isSunny</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"الطقس مثالي للنزهة الخارجية"</span>);<br>
                                 } <span class="keyword">else</span> {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"لا يمكنك قيادة السيارة"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"قد تحتاج للتخطيط لنشاط داخلي"</span>);<br>
                                 }<br><br>
                                 
-                                <span class="comment">// مثال: التحقق من نطاق العمر</span><br>
-                                <span class="keyword">if</span> (<span class="variable">age</span> >= <span class="string">18</span> && <span class="variable">age</span> <= <span class="string">30</span>) {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"عمرك بين 18 و 30 سنة"</span>);<br>
+                                <span class="comment">// مثال: التحقق من نطاق الرقم</span><br>
+                                <span class="type">int</span> <span class="variable">number</span> = <span class="string">15</span>;<br>
+                                <span class="keyword">if</span> (<span class="variable">number</span> >= <span class="string">10</span> && <span class="variable">number</span> <= <span class="string">20</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"الرقم بين 10 و 20"</span>);<br>
                                 }
                             </div>
                         </div>
                     </div>
                     
                     <div class="topic">
-                        <h3 class="topic-title">المشغل المنطقي OR (||)</h3>
+                        <h3 class="topic-title">الشرط المنطقي OR (||)</h3>
                         <div class="topic-content">
                             <div class="definition">
-                                <strong>المشغل || (OR - أو):</strong> يعيد true إذا كان أحد الشرطين صحيحاً على الأقل.
+                                <strong>الشرط || (OR - أو):</strong> يعيد true إذا كان أحد الشرطين صحيحاً على الأقل.
                             </div>
                             
                             <table class="operator-table">
@@ -747,10 +748,10 @@
                     </div>
                     
                     <div class="topic">
-                        <h3 class="topic-title">المشغل المنطقي NOT (!)</h3>
+                        <h3 class="topic-title">الشرط المنطقي NOT (!)</h3>
                         <div class="topic-content">
                             <div class="definition">
-                                <strong>المشغل ! (NOT - لا):</strong> يعكس القيمة المنطقية (يجعل true تصبح false والعكس).
+                                <strong>الشرط ! (NOT - لا):</strong> يعكس القيمة المنطقية (يجعل true تصبح false والعكس).
                             </div>
                             
                             <table class="operator-table">
@@ -795,35 +796,35 @@
                     </div>
                     
                     <div class="topic">
-                        <h3 class="topic-title">دمج المشغلات المنطقية</h3>
+                        <h3 class="topic-title">دمج الشروط المنطقية</h3>
                         <div class="topic-content">
                             <div class="definition">
-                                <strong>دمج المشغلات المنطقية:</strong> يمكن دمج المشغلات المنطقية معاً لإنشاء شروط أكثر تعقيداً.
+                                <strong>دمج الشروط المنطقية:</strong> يمكن دمج الشروط المنطقية معاً لإنشاء شروط أكثر تعقيداً.
                             </div>
                             
                             <div class="code-example">
-                                <span class="comment">// مثال: نظام القبول الجامعي</span><br>
-                                <span class="type">int</span> <span class="variable">highSchoolGrade</span> = <span class="string">85</span>; <span class="comment">// درجة الثانوية</span><br>
-                                <span class="type">int</span> <span class="variable">entranceExamScore</span> = <span class="string">75</span>; <span class="comment">// درجة امتحان القبول</span><br>
-                                <span class="type">boolean</span> <span class="variable">hasRecommendation</span> = <span class="keyword">true</span>; <span class="comment">// هل لديه توصية؟</span><br><br>
+                                <span class="comment">// مثال: نظام القبول في نادي رياضي</span><br>
+                                <span class="type">int</span> <span class="variable">age</span> = <span class="string">18</span>; <span class="comment">// العمر</span><br>
+                                <span class="type">boolean</span> <span class="variable">hasMedicalCertificate</span> = <span class="keyword">true</span>; <span class="comment">// هل لديه شهادة طبية؟</span><br>
+                                <span class="type">boolean</span> <span class="variable">parentalConsent</span> = <span class="keyword">false</span>; <span class="comment">// هل لديه موافقة ولي الأمر؟</span><br><br>
                                 
-                                <span class="comment">// الشرط: القبول إذا كانت درجة الثانوية ≥ 80 ودرجة الامتحان ≥ 70</span><br>
-                                <span class="comment">// أو إذا كانت درجة الثانوية ≥ 70 ولديه توصية</span><br>
-                                <span class="keyword">if</span> ((<span class="variable">highSchoolGrade</span> >= <span class="string">80</span> && <span class="variable">entranceExamScore</span> >= <span class="string">70</span>) ||<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;(<span class="variable">highSchoolGrade</span> >= <span class="string">70</span> && <span class="variable">hasRecommendation</span>)) {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"مبروك! تم قبولك في الجامعة"</span>);<br>
+                                <span class="comment">// الشرط: القبول إذا كان العمر ≥ 18 ولديه شهادة طبية</span><br>
+                                <span class="comment">// أو إذا كان العمر ≥ 16 ولديه موافقة ولي الأمر</span><br>
+                                <span class="keyword">if</span> ((<span class="variable">age</span> >= <span class="string">18</span> && <span class="variable">hasMedicalCertificate</span>) ||<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;(<span class="variable">age</span> >= <span class="string">16</span> && <span class="variable">parentalConsent</span>)) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"مبروك! يمكنك الانضمام للنادي الرياضي"</span>);<br>
                                 } <span class="keyword">else</span> {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"نأسف، لم تقبل في الجامعة"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"نأسف، لا يمكنك الانضمام للنادي حالياً"</span>);<br>
                                 }
                             </div>
                             
                             <div class="note">
-                                <strong>ملاحظة حول أولوية المشغلات:</strong>
+                                <strong>ملاحظة حول أولوية الشروط:</strong>
                                 <ol style="padding-right: 20px; margin-top: 10px">
                                     <li>الأقواس () - الأعلى أولوية</li>
-                                    <li>المشغل ! (NOT)</li>
-                                    <li>المشغل && (AND)</li>
-                                    <li>المشغل || (OR) - الأقل أولوية</li>
+                                    <li>الشرط ! (NOT)</li>
+                                    <li>الشرط && (AND)</li>
+                                    <li>الشرط || (OR) - الأقل أولوية</li>
                                 </ol>
                                 <p>يجب استخدام الأقواس لتوضيح أولوية التنفيذ عندما تكون الشروط معقدة.</p>
                             </div>
@@ -832,24 +833,24 @@
                 </div>
             </section>
             
-            <!-- القسم 5: المشغلات المقارنة -->
+            <!-- القسم 5: الشروط المقارنة -->
             <section id="section5" class="section">
                 <div class="section-header">
                     <div class="section-number">5</div>
-                    <h2 class="section-title">المشغلات المقارنة (==, !=, >, <, >=, <=)</h2>
+                    <h2 class="section-title">الشروط المقارنة (==, !=, >, <, >=, <=)</h2>
                 </div>
                 <div class="section-content">
                     <div class="topic">
-                        <h3 class="topic-title">أنواع المشغلات المقارنة</h3>
+                        <h3 class="topic-title">أنواع الشروط المقارنة</h3>
                         <div class="topic-content">
                             <div class="definition">
-                                <strong>المشغلات المقارنة:</strong> تستخدم لمقارنة قيمتين وتعيد قيمة منطقية (true أو false).
+                                <strong>الشروط المقارنة:</strong> تستخدم لمقارنة قيمتين وتعيد قيمة منطقية (true أو false).
                             </div>
                             
                             <table class="operator-table">
                                 <thead>
                                     <tr>
-                                        <th>المشغل</th>
+                                        <th>الشرط</th>
                                         <th>الاسم</th>
                                         <th>الوصف</th>
                                         <th>مثال</th>
@@ -908,14 +909,14 @@
                         <h3 class="topic-title">الفرق بين == و =</h3>
                         <div class="topic-content">
                             <div class="definition">
-                                <strong>تحذير هام:</strong> هناك فرق كبير بين المشغل == (المقارنة) والمشغل = (الإسناد).
+                                <strong>تحذير هام:</strong> هناك فرق كبير بين الشرط == (المقارنة) والشرط = (الإسناد).
                             </div>
                             
                             <div class="code-example">
-                                <span class="comment">// المشغل = (الإسناد)</span><br>
+                                <span class="comment">// الشرط = (الإسناد)</span><br>
                                 <span class="type">int</span> <span class="variable">x</span> = <span class="string">10</span>; <span class="comment">// تسند القيمة 10 للمتغير x</span><br><br>
                                 
-                                <span class="comment">// المشغل == (المقارنة)</span><br>
+                                <span class="comment">// الشرط == (المقارنة)</span><br>
                                 <span class="keyword">if</span> (<span class="variable">x</span> == <span class="string">10</span>) { <span class="comment">// تقارن قيمة x مع 10</span><br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"x تساوي 10"</span>);<br>
                                 }<br><br>
@@ -936,7 +937,7 @@
                         <h3 class="topic-title">مقارنة القيم النصية (Strings)</h3>
                         <div class="topic-content">
                             <div class="definition">
-                                <strong>مقارنة النصوص:</strong> يجب استخدام الدالة equals() لمقارنة النصوص بدلاً من المشغل ==.
+                                <strong>مقارنة النصوص:</strong> يجب استخدام الدالة equals() لمقارنة النصوص بدلاً من الشرط ==.
                             </div>
                             
                             <div class="code-example">
@@ -953,7 +954,7 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"name1 و name3 متساويان بالمحتوى"</span>);<br>
                                 }<br><br>
                                 
-                                <span class="comment">// المشغل == قد لا يعمل بشكل صحيح مع النصوص</span><br>
+                                <span class="comment">// الشرط == قد لا يعمل بشكل صحيح مع النصوص</span><br>
                                 <span class="keyword">if</span> (<span class="variable">name1</span> == <span class="variable">name2</span>) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"قد يطبع أو لا يطبع حسب كيفية إنشاء النصوص"</span>);<br>
                                 }<br><br>
@@ -1162,7 +1163,7 @@
                                 </ul>
                             </li>
                             <li>استخدم Scanner لقراءة اسم المستخدم المدخل</li>
-                            <li>استخدم المشغلات المنطقية (&&, ||) للتحقق من الشروط</li>
+                            <li>استخدم الشروط المنطقية (&&, ||) للتحقق من الشروط</li>
                             <li>اعرض رسالة توضح أي شروط لم تتحقق في حالة الاسم غير الصالح</li>
                             <li>في حالة الاسم الصالح، اعرض رسالة ترحيب بالمستخدم</li>
                         </ul>
@@ -1214,8 +1215,8 @@
             </div>
             
             <p style="margin-top: 30px; color: #bdc3c7; font-size: 0.9rem;">
-			© 2026 سايبر خليل - جميع الحقوق محفوظة.            
-			</p>
+            © 2026 سايبر خليل - جميع الحقوق محفوظة.            
+            </p>
         </div>
     </footer>
     
