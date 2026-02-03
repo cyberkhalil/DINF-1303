@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسبوع الرابع - هياكل التحكم المتقدمة | DINF-1303</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* أنماط خاصة بتمثيل الشروط المتداخلة والمتعددة */
+        .nested-if-visual {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .nested-level {
+            margin-right: 30px;
+            padding: 15px;
+            border-right: 4px solid var(--secondary-color);
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .nested-level::before {
+            content: "└─";
+            position: absolute;
+            right: -25px;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .nested-level .nested-level {
+            margin-right: 40px;
+            background-color: #e9ecef;
+            border-right-color: #9b59b6;
+        }
+        
+        .nested-level .nested-level::before {
+            color: #9b59b6;
+        }
+        
+        .condition-box {
+            background-color: #e8f4fc;
+            border-right: 4px solid #3498db;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .action-box {
+            background-color: #e8f5e9;
+            border-right: 4px solid #4caf50;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .switch-visual {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        
+        .switch-diagram {
+            display: inline-block;
+            text-align: right;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .switch-variable {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .case-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            padding: 8px 15px;
+            background-color: white;
+            border-radius: 4px;
+            border-right: 3px solid #3498db;
+        }
+        
+        .case-label {
+            background-color: #3498db;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 3px;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .case-action {
+            color: #555;
+        }
+        
+        .flow-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .flow-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .flow-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .flow-step-rtl {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        .step-arrow {
+            color: #f39c12;
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .discount-tiers {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .discount-tiers h4 {
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tier-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 8px 0;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 5px;
+        }
+        
+        .tier-range {
+            font-weight: bold;
+        }
+        
+        .tier-value {
+            background-color: rgba(255,255,255,0.3);
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: right;
+        }
+        
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        .check-icon { color: #4caf50; font-weight: bold; }
+        .cross-icon { color: #f44336; font-weight: bold; }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border-right: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        
+        .tip-box {
+            background-color: #e3f2fd;
+            border-right: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <h1>الأسبوع الرابع: هياكل التحكم المتقدمة</h1>
+                <p>مساق لغة برمجة جافا - DINF-1303 | قسم أمن المعلومات</p>
+                <div class="week-indicator">الأسبوع الرابع من 12 أسبوع</div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- التنقل السريع -->
+        <nav class="quick-nav">
+            <div class="nav-links">
+                <a href="#section1">الشروط المتعددة</a>
+                <a href="#section2">if-else if-else</a>
+                <a href="#section3">switch-case</a>
+                <a href="#section4">المقارنة بين الأنواع</a>
+                <a href="#section5">الشروط المتداخلة</a>
+                <a href="#section6">التطبيقات العملية</a>
+                <a href="#assignments">الواجبات</a>
+            </div>
+        </nav>
+        
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- القسم 1: مقدمة في الشروط المتقدمة -->
+            <section id="section1" class="section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">مقدمة في الشروط المتقدمة</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">من if-else البسيط إلى الشروط المتعددة</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التطور المنطقي:</strong> في الأسابيع السابقة تعلمنا التعامل مع خيارين (if-else)، لكن في الحياة الواقعية غالباً ما نواجه <strong>ثلاثة خيارات أو أكثر</strong>.
+                            </div>
+                            
+                            <div class="note">
+                                <strong>مثال واقعي:</strong> نظام الخصومات في المتجر:
+                                <ul style="padding-right: 20px; margin-top: 10px">
+                                    <li>إذا كانت المشتريات > 1000 شيكل → خصم 20%</li>
+                                    <li>إذا كانت المشتريات > 500 شيكل → خصم 10%</li>
+                                    <li>إذا كانت المشتريات > 100 شيكل → خصم 5%</li>
+                                    <li>غير ذلك → لا يوجد خصم</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="warning-box">
+                                <strong>لماذا لا نستخدم if-else منفصلة؟</strong><br>
+                                استخدام if-else منفصلة سيتحقق من جميع الشروط حتى لو تحقق أحدها، وهذا غير منطقي وغير فعال. نحتاج إلى هيكل يتوقف عند أول شرط يتحقق.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 2: if-else if-else المتعددة -->
+            <section id="section2" class="section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">جملة if-else if-else المتعددة</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">تركيب الجملة المتعددة</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التركيب:</strong> تسمح بفحص عدة شروط بشكل تسلسلي، وعند تحقق أحدها يتم تنفيذ كتلته وتجاهل باقي الشروط.
+                            </div>
+                            
+                            <div class="code-example">
+                                <span class="keyword">if</span> (<span class="comment">/* الشرط الأول */</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// الكود إذا تحقق الشرط الأول</span><br>
+                                } <span class="keyword">else if</span> (<span class="comment">/* الشرط الثاني */</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// الكود إذا تحقق الشرط الثاني</span><br>
+                                } <span class="keyword">else if</span> (<span class="comment">/* الشرط الثالث */</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// الكود إذا تحقق الشرط الثالث</span><br>
+                                } <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// الكود إذا لم يتحقق أي شرط</span><br>
+                                }
+                            </div>
+                            
+                            <div class="tip-box">
+                                <strong>القاعدة الذهبية:</strong> يتم التحقق من الشروط من الأعلى إلى الأسفل، وأول شرط يتحقق يُنفَّذ ويتم تجاهل الباقي. لذلك يجب ترتيب الشروط من الأكثر تحديداً إلى الأقل تحديداً.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">مثال: نظام تصنيف الدرجات المتقدم</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                
+                                <span class="keyword">public class</span> <span class="function">GradeClassification</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل درجة الطالب (0-100): "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">grade</span> = <span class="variable">scanner</span>.nextInt();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">grade</span> < <span class="string">0</span> || <span class="variable">grade</span> > <span class="string">100</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"خطأ: الدرجة يجب أن تكون بين 0 و 100"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">grade</span> >= <span class="string">90</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"التقدير: ممتاز (A+)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">grade</span> >= <span class="string">80</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"التقدير: جيد جداً (A)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">grade</span> >= <span class="string">70</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"التقدير: جيد (B)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">grade</span> >= <span class="string">60</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"التقدير: مقبول (C)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">grade</span> >= <span class="string">50</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"التقدير: ضعيف (D)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"التقدير: راسب (F)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">scanner</span>.<span class="function">close</span>();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                            
+                            <div class="warning-box">
+                                <strong>تنبيه هام:</strong> إذا عكسنا الترتيب وبدأنا بالتحقق من >= 50 أولاً، فإن أي درجة أعلى من 50 ستُصنف ضعيف حتى لو كانت 95! لذلك نبدأ دائماً من الأعلى.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">مثال: حاسبة الضرائب المتدرجة</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                
+                                <span class="keyword">public class</span> <span class="function">TaxCalculator</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل الراتب الشهري ($): "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">salary</span> = <span class="variable">scanner</span>.nextDouble();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">taxRate</span> = <span class="string">0</span>;<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">salary</span> <= <span class="string">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"خطأ: الراتب يجب أن يكون موجباً"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">salary</span> <= <span class="string">3000</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">taxRate</span> = <span class="string">0</span>; <span class="comment">// معفى من الضريبة</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">salary</span> <= <span class="string">5000</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">taxRate</span> = <span class="string">0.05</span>; <span class="comment">// 5%</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">salary</span> <= <span class="string">10000</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">taxRate</span> = <span class="string">0.10</span>; <span class="comment">// 10%</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">salary</span> <= <span class="string">20000</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">taxRate</span> = <span class="string">0.15</span>; <span class="comment">// 15%</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">taxRate</span> = <span class="string">0.20</span>; <span class="comment">// 20%</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">salary</span> > <span class="string">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">tax</span> = <span class="variable">salary</span> * <span class="variable">taxRate</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">netSalary</span> = <span class="variable">salary</span> - <span class="variable">tax</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"نسبة الضريبة: %.0f%%\n"</span>, <span class="variable">taxRate</span> * <span class="string">100</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"قيمة الضريبة: $%.2f\n"</span>, <span class="variable">tax</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"الراتب الصافي: $%.2f\n"</span>, <span class="variable">netSalary</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">scanner</span>.<span class="function">close</span>();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 3: switch-case -->
+            <section id="section3" class="section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">جملة switch-case</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">متى نستخدم switch-case؟</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>التعريف:</strong> بديل منظم وواضح لـ if-else if عندما نتحقق من <strong>نفس المتغير</strong> ضد <strong>قيم محددة</strong>.
+                            </div>
+                            
+                            <div class="tip-box">
+                                <strong>استخدم switch-case عندما:</strong>
+                                <ul style="padding-right: 20px; margin-top: 10px">
+                                    <li>تقوم بمقارنة متغير واحد فقط</li>
+                                    <li>القيم التي تقارن بها ثابتة ومعروفة</li>
+                                    <li>عدد الحالات كبير نسبياً (3 أو أكثر)</li>
+                                    <li>تريد كود أكثر تنظيماً وقراءة</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="switch-visual">
+                                <div class="switch-diagram">
+                                    <div class="switch-variable">المتغير: اليوم</div>
+                                    <div class="case-item">
+                                        <span class="case-label">case 1:</span>
+                                        <span class="case-action">الأحد</span>
+                                    </div>
+                                    <div class="case-item">
+                                        <span class="case-label">case 2:</span>
+                                        <span class="case-action">الإثنين</span>
+                                    </div>
+                                    <div class="case-item">
+                                        <span class="case-label">case 3:</span>
+                                        <span class="case-action">الثلاثاء</span>
+                                    </div>
+                                    <div class="case-item">
+                                        <span class="case-label">default:</span>
+                                        <span class="case-action">يوم غير معروف</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">تركيب switch-case</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="keyword">switch</span> (<span class="variable">المتغير</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">القيمة1</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// كود القيمة 1</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">القيمة2</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// كود القيمة 2</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// الكود الافتراضي</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                }
+                            </div>
+                            
+                            <div class="warning-box">
+                                <strong>مهم جداً - كلمة break:</strong><br>
+                                إذا نسيت <code>break</code> في نهاية كل case، سيستمر البرنامج في تنفيذ الـ case التالية حتى يجد break! هذه الظاهرة تسمى "Fall-through" وقد تكون مفيدة أحياناً لكنها خطيرة إذا لم تكن مقصودة.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">مثال: نظام المكافآت حسب رقم الشهر</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                
+                                <span class="keyword">public class</span> <span class="function">MonthlyBonus</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل رقم الشهر (1-12): "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">month</span> = <span class="variable">scanner</span>.nextInt();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span> (<span class="variable">month</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">1</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"يناير: مكافأة عيد رأس السنة!"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">2</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"فبراير: مكافأة خاصة!"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">3</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">4</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">5</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"ربيع: مكافأة موسمية 10%"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">6</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">7</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">8</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"صيف: مكافأة إجازة 15%"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">12</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"ديسمبر: مكافأة نهاية العام!"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"شهر عادي: لا توجد مكافأة خاصة"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">scanner</span>.<span class="function">close</span>();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                            
+                            <div class="note">
+                                <strong>ملاحظة:</strong> في المثال أعلاه، شهور 3 و 4 و 5 تشترك في نفس الكود (Fall-through المقصود)، وكذلك شهور الصيف.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">switch-case مع النصوص (Java 7+)</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                
+                                <span class="keyword">public class</span> <span class="function">ArabicNumbers</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل رقماً (1-5): "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">String</span> <span class="variable">numStr</span> = <span class="variable">scanner</span>.nextLine();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span> (<span class="variable">numStr</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"1"</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"واحد"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"2"</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"اثنان"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"3"</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"ثلاثة"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"4"</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"أربعة"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"5"</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"خمسة"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"رقم خارج النطاق"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">scanner</span>.<span class="function">close</span>();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 4: المقارنة -->
+            <section id="section4" class="section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">المقارنة بين أنواع الشروط</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">جدول المقارنة الشامل</h3>
+                        <div class="topic-content">
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>المعيار</th>
+                                        <th>if-else if</th>
+                                        <th>switch-case</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>سهولة القراءة (للحالات المتعددة)</td>
+                                        <td class="check-icon">جيدة</td>
+                                        <td class="check-icon">ممتازة</td>
+                                    </tr>
+                                    <tr>
+                                        <td>السرعة (للحالات المتعددة)</td>
+                                        <td>أبطأ قليلاً</td>
+                                        <td class="check-icon">أسرع</td>
+                                    </tr>
+                                    <tr>
+                                        <td>التحقق من نطاقات (range)</td>
+                                        <td class="check-icon">ممكن (>= , <=)</td>
+                                        <td class="cross-icon">غير ممكن</td>
+                                    </tr>
+                                    <tr>
+                                        <td>التحقق من شرط مركب</td>
+                                        <td class="check-icon">ممكن (&& , ||)</td>
+                                        <td class="cross-icon">غير ممكن</td>
+                                    </tr>
+                                    <tr>
+                                        <td>التحقق من قيم ثابتة فقط</td>
+                                        <td>ممكن</td>
+                                        <td class="check-icon">مثالي</td>
+                                    </tr>
+                                    <tr>
+                                    <td>دعم الأنواع</td>
+                                        <td class="check-icon">جميع الأنواع</td>
+                                        <td>int, char, String, enum</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Flexibility (المرونة)</td>
+                                        <td class="check-icon">عالية</td>
+                                        <td>محدودة</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">متى تستخدم كل منهما؟</h3>
+                        <div class="topic-content">
+                            <div class="flow-comparison">
+                                <div class="flow-card">
+                                    <h4>استخدم if-else if عندما:</h4>
+                                    <div class="flow-step-rtl">
+                                        <span class="step-arrow">◀</span>
+                                        <span>تتحقق من نطاقات (مثال: الدرجة >= 90)</span>
+                                    </div>
+                                    <div class="flow-step-rtl">
+                                        <span class="step-arrow">◀</span>
+                                        <span>تستخدم شروط منطقية معقدة (&& , ||)</span>
+                                    </div>
+                                    <div class="flow-step-rtl">
+                                        <span class="step-arrow">◀</span>
+                                        <span>تقارن متغيرات مختلفة</span>
+                                    </div>
+                                    <div class="flow-step-rtl">
+                                        <span class="step-arrow">◀</span>
+                                        <span>عدد الحالات قليل (2-3)</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="flow-card">
+                                    <h4>استخدم switch-case عندما:</h4>
+                                    <div class="flow-step-rtl">
+                                        <span class="step-arrow">◀</span>
+                                        <span>تتحقق من قيم محددة لمتغير واحد</span>
+                                    </div>
+                                    <div class="flow-step-rtl">
+                                        <span class="step-arrow">◀</span>
+                                        <span>عدد الحالات كبير (> 3)</span>
+                                    </div>
+                                    <div class="flow-step-rtl">
+                                        <span class="step-arrow">◀</span>
+                                        <span>تريد كود أكثر تنظيماً ووضوحاً</span>
+                                    </div>
+                                    <div class="flow-step-rtl">
+                                        <span class="step-arrow">◀</span>
+                                        <span>القيم من نوع int, char, String</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 5: الشروط المتداخلة -->
+            <section id="section5" class="section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">الشروط المتداخلة (Nested if)</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">مفهوم التداخل</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>الشروط المتداخلة:</strong> هي if داخل if، أي أنه بعد التحقق من شرط أساسي، نتحقق من شروط فرعية أخرى داخله.
+                            </div>
+                            
+                            <div class="nested-if-visual">
+                                <div class="condition-box">
+                                    الشرط الخارجي: هل المستخدم مسجل دخول؟
+                                </div>
+                                <div class="nested-level">
+                                    <div class="condition-box" style="margin-right: 0;">
+                                        إذا نعم ← تحقق من الصلاحيات
+                                    </div>
+                                    <div class="nested-level">
+                                        <div class="condition-box" style="background-color: #e8f5e9; border-color: #4caf50;">
+                                            هل هو Admin؟
+                                        </div>
+                                        <div class="action-box">
+                                            ← السماح بالوصول الكامل
+                                        </div>
+                                    </div>
+                                    <div class="nested-level">
+                                        <div class="condition-box" style="background-color: #fff3e0; border-color: #ff9800;">
+                                            هل هو User؟
+                                        </div>
+                                        <div class="action-box" style="background-color: #fff8e1; border-color: #ffc107;">
+                                            ← السماح بالوصول المحدود
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="condition-box" style="background-color: #ffebee; border-color: #f44336;">
+                                    إذا لا ← اعرض رسالة: "الرجاء تسجيل الدخول"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">مثال: نظام الصلاحيات المتقدم</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                
+                                <span class="keyword">public class</span> <span class="function">AccessControl</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"هل أنت مسجل دخول؟ (true/false): "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">boolean</span> <span class="variable">isLoggedIn</span> = <span class="variable">scanner</span>.nextBoolean();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">isLoggedIn</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"✓ تم تسجيل الدخول"</span>);<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"ادخل نوع المستخدم (admin/user/guest): "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">String</span> <span class="variable">userType</span> = <span class="variable">scanner</span>.next();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">userType</span>.equals(<span class="string">"admin"</span>)) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"• لديك صلاحية: إضافة/حذف/تعديل المستخدمين"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"• لديك صلاحية: عرض التقارير"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"• لديك صلاحية: تعديل الإعدادات"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">userType</span>.equals(<span class="string">"user"</span>)) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"هل الحساب موثق؟ (true/false): "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">boolean</span> <span class="variable">isVerified</span> = <span class="variable">scanner</span>.nextBoolean();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">isVerified</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"• لديك صلاحية: إنشاء المحتوى"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"• لديك صلاحية: التعليق"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"• لديك صلاحية: قراءة فقط (الحساب غير موثق)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">userType</span>.equals(<span class="string">"guest"</span>)) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"• لديك صلاحية: قراءة فقط"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"⚠ نوع مستخدم غير معروف"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"✗ خطأ: يجب تسجيل الدخول أولاً!"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">scanner</span>.<span class="function">close</span>();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                            
+                            <div class="tip-box">
+                                <strong>نصيحة:</strong> لا تبالغ في التداخل (أكثر من 3 مستويات) لأنه يجعل الكود صعب القراءة والصيانة. إذا احتجت لتداخل كثيف، فكر في استخدام switch-case أو إعادة هيكلة الكود.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- القسم 6: التطبيقات العملية -->
+            <section id="section6" class="section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">التطبيقات العملية المتكاملة</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">التطبيق 1: نظام خصومات متعدد المستويات</h3>
+                        <div class="topic-content">
+                            <div class="discount-tiers">
+                                <h4>🎯 نظام الخصومات</h4>
+                                <div class="tier-item">
+                                    <span class="tier-range">≥ 5000 شيكل</span>
+                                    <span class="tier-value">خصم 25%</span>
+                                </div>
+                                <div class="tier-item">
+                                    <span class="tier-range">3000 - 4999 شيكل</span>
+                                    <span class="tier-value">خصم 20%</span>
+                                </div>
+                                <div class="tier-item">
+                                    <span class="tier-range">1000 - 2999 شيكل</span>
+                                    <span class="tier-value">خصم 10%</span>
+                                </div>
+                                <div class="tier-item">
+                                    <span class="tier-range">500 - 999 شيكل</span>
+                                    <span class="tier-value">خصم 5%</span>
+                                </div>
+                                <div class="tier-item">
+                                    <span class="tier-range">< 500 شيكل</span>
+                                    <span class="tier-value">لا يوجد خصم</span>
+                                </div>
+                            </div>
+                            
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                
+                                <span class="keyword">public class</span> <span class="function">AdvancedDiscount</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل إجمالي المشتريات (شيكل): "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">amount</span> = <span class="variable">scanner</span>.nextDouble();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">discount</span> = <span class="string">0</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">String</span> <span class="variable">tier</span> = <span class="string">""</span>;<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">amount</span> < <span class="string">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"خطأ: المبلغ لا يمكن أن يكون سالباً"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">amount</span> >= <span class="string">5000</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">discount</span> = <span class="string">0.25</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">tier</span> = <span class="string">"ذهبي"</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">amount</span> >= <span class="string">3000</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">discount</span> = <span class="string">0.20</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">tier</span> = <span class="string">"فضي"</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">amount</span> >= <span class="string">1000</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">discount</span> = <span class="string">0.10</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">tier</span> = <span class="string">"برونزي"</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else if</span> (<span class="variable">amount</span> >= <span class="string">500</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">discount</span> = <span class="string">0.05</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">tier</span> = <span class="string">"عضو"</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">tier</span> = <span class="string">"زائر"</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">discountAmount</span> = <span class="variable">amount</span> * <span class="variable">discount</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">finalAmount</span> = <span class="variable">amount</span> - <span class="variable">discountAmount</span>;<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"\n========== فاتورتك =========="</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"المبلغ الأصلي: %.2f شيكل\n"</span>, <span class="variable">amount</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"فئة العميل: %s\n"</span>, <span class="variable">tier</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"نسبة الخصم: %.0f%%\n"</span>, <span class="variable">discount</span> * <span class="string">100</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"قيمة الخصم: %.2f شيكل\n"</span>, <span class="variable">discountAmount</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"المبلغ النهائي: %.2f شيكل\n"</span>, <span class="variable">finalAmount</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">discount</span> > <span class="string">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"\n🎉 لقد وفرت: "</span> + <span class="variable">discountAmount</span> + <span class="string">" شيكل!"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">scanner</span>.<span class="function">close</span>();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic">
+                        <h3 class="topic-title">التطبيق 2: حاسبة العمليات الرياضية المتقدمة</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                
+                                <span class="keyword">public class</span> <span class="function">SmartCalculator</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"=== حاسبة ذكية ==="</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل الرقم الأول: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">num1</span> = <span class="variable">scanner</span>.nextDouble();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل الرقم الثاني: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">num2</span> = <span class="variable">scanner</span>.nextDouble();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"\nاختر العملية:"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"1. جمع (+)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"2. طرح (-)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"3. ضرب (*)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"4. قسمة (/)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"5. باقي القسمة (%)"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"اختيارك: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">choice</span> = <span class="variable">scanner</span>.nextInt();<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">double</span> <span class="variable">result</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">boolean</span> <span class="variable">valid</span> = <span class="keyword">true</span>;<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span> (<span class="variable">choice</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">1</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">result</span> = <span class="variable">num1</span> + <span class="variable">num2</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"%.2f + %.2f = %.2f\n"</span>, <span class="variable">num1</span>, <span class="variable">num2</span>, <span class="variable">result</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">2</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">result</span> = <span class="variable">num1</span> - <span class="variable">num2</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"%.2f - %.2f = %.2f\n"</span>, <span class="variable">num1</span>, <span class="variable">num2</span>, <span class="variable">result</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">3</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">result</span> = <span class="variable">num1</span> * <span class="variable">num2</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"%.2f × %.2f = %.2f\n"</span>, <span class="variable">num1</span>, <span class="variable">num2</span>, <span class="variable">result</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">4</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">num2</span> == <span class="string">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"خطأ: لا يمكن القسمة على صفر!"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">result</span> = <span class="variable">num1</span> / <span class="variable">num2</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"%.2f ÷ %.2f = %.2f\n"</span>, <span class="variable">num1</span>, <span class="variable">num2</span>, <span class="variable">result</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">5</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">num2</span> == <span class="string">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"خطأ: لا يمكن القسمة على صفر!"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"%.0f %% %.0f = %.0f\n"</span>, <span class="variable">num1</span>, <span class="variable">num2</span>, (<span class="variable">num1</span> % <span class="variable">num2</span>));<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"خيار غير صحيح!"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">scanner</span>.<span class="function">close</span>();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- الواجبات -->
+            <section id="assignments" class="assignments">
+                <h3>الواجبات والتطبيقات العملية للأسبوع الرابع</h3>
+                
+                <div class="topic">
+                    <h3 class="topic-title">الواجب الأول: برنامج حاسبة الخصومات المتقدمة</h3>
+                    <div class="topic-content">
+                        <ul class="task-list">
+                            <li>اكتب برنامجاً يحسب الخصم بناءً على فئة العميل ومبلغ الشراء</li>
+                            <li>فئات العملاء: عادي، عضو، VIP</li>
+                            <li>نسب الخصم:
+                                <ul style="padding-right: 20px; margin-top: 10px">
+                                    <li>عادي: 5% إذا كان المبلغ > 200، وإلا لا يوجد خصم</li>
+                                    <li>عضو: 10% إذا كان المبلغ > 500، 5% إذا كان المبلغ > 200</li>
+                                    <li>VIP: 20% إذا كان المبلغ > 1000، 15% إذا كان المبلغ > 500، 10% للباقي</li>
+                                </ul>
+                            </li>
+                            <li>استخدم switch-case لتحديد فئة العميل</li>
+                            <li>استخدم if-else if لحساب نسبة الخصم داخل كل فئة</li>
+                            <li>اعرض المبلغ الأصلي، نسبة الخصم، قيمة الخصم، والمبلغ النهائي</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <h3 class="topic-title">الواجب الثاني: نظام تحويل الأرقام إلى نصوص</h3>
+                    <div class="topic-content">
+                        <ul class="task-list">
+                            <li>اكتب برنامجاً يقرأ رقماً من 1 إلى 10 من المستخدم</li>
+                            <li>استخدم switch-case لتحويل الرقم إلى نص باللغة العربية
+                                <ul style="padding-right: 20px; margin-top: 10px">
+                                    <li>1: واحد، 2: اثنان، 3: ثلاثة، ...، 10: عشرة</li>
+                                </ul>
+                            </li>
+                            <li>إذا كان الرقم خارج النطاق (1-10) اطبع رسالة تنبيه</li>
+                            <li>أضف ميزة إضافية: تحويل الرقم إلى نص بالإنجليزية إذا أراد المستخدم</li>
+                            <li>اسأل المستخدم: "هل تريد العربية أم الإنجليزية؟"</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <h3 class="topic-title">الواجب الثالث: برنامج محاكاة نظام صلاحيات المستخدمين</h3>
+                    <div class="topic-content">
+                        <ul class="task-list">
+                            <li>انشئ نظام بسيط لتحديد صلاحيات المستخدمين باستخدام الشروط المتداخلة</li>
+                            <li>المتطلبات:
+                                <ul style="padding-right: 20px; margin-top: 10px">
+                                    <li>تحقق أولاً: هل المستخدم مسجل دخول؟ (true/false)</li>
+                                    <li>إذا نعم: تحقق من نوع الحساب (admin/moderator/user)</li>
+                                    <li>Admin: كل الصلاحيات (قراءة، كتابة، حذف، إدارة المستخدمين)</li>
+                                    <li>Moderator: صلاحيات (قراءة، كتابة، حذف)</li>
+                                    <li>User: تحقق إضافي: هل الحساب موثق؟
+                                        <ul style="padding-right: 20px;">
+                                            <li>موثق: قراءة وكتابة</li>
+                                            <li>غير موثق: قراءة فقط</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>استخدم nested if statements</li>
+                            <li>اعرض قائمة بالصلاحيات المتاحة للمستخدم</li>
+                            <li>أضف رسائل مناسبة في حالة عدم تسجيل الدخول</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px; padding: 15px; background-color: white; border-radius: 8px;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 10px;">تعليمات التسليم:</h4>
+                    <ul style="padding-right: 20px;">
+                        <li>كل واجب يجب أن يكون في مشروع NetBeans منفصل</li>
+                        <li>يجب تسمية المشاريع: Week4_Assignment1, Week4_Assignment2, Week4_Assignment3</li>
+                        <li>تسليم الكود مصوراً (screenshot) بوضوح عالٍ</li>
+                        <li>تحويل جميع الصور إلى ملف PDF واحد</li>
+                        <li>تسليم الملف عبر الصف الدراسي</li>
+                        <li>موعد التسليم: سيتم تحديده عبر منصة التعليم</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <h3>الأسبوع الرابع - هياكل التحكم المتقدمة</h3>
+            <br>
+            <p>مساق لغة برمجة جافا | DINF-1303</p>
+            
+            <div class="footer-info">
+                <div class="footer-item">
+                    <h4>اسم المدرس</h4>
+                    <p>م. محمود وليد الشيخ خليل</p>
+                </div>
+                
+                <div class="footer-item">
+                    <h4>البريد الإلكتروني</h4>
+                    <p>makhalil@ucas.edu.ps</p>
+                </div>
+                
+                <div class="footer-item">
+                    <h4>القسم</h4>
+                    <p>أمن المعلومات</p>
+                </div>
+                
+                <div class="footer-item">
+                    <h4>الكلية</h4>
+                    <p>الكلية الجامعية للعلوم التطبيقية</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 30px; color: #bdc3c7; font-size: 0.9rem;">
+                © 2026 سايبر خليل - جميع الحقوق محفوظة.
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // سكريبت للتنقل السلس
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
