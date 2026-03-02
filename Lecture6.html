@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسبوع السادس - الحلقات التكرارية (while loop) | DINF-1303</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* أنماط خاصة بشرح while loop */
+        .while-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        .while-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            border-top: 4px solid var(--secondary-color);
+        }
+        .while-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+        .code-inline {
+            background-color: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            direction: ltr;
+            display: inline-block;
+        }
+        .flow-diagram {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            border-right: 4px solid #f39c12;
+        }
+        .flow-step {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #f39c12;
+            margin: 0 10px;
+        }
+        .validation-example {
+            background-color: #e8f4fc;
+            border-right: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .attempt-box {
+            background-color: #fff3cd;
+            border-right: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        .simulation-output {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            direction: ltr;
+            text-align: left;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <h1>الأسبوع السادس: الحلقات التكرارية - while loop</h1>
+                <p>مساق لغة برمجة جافا - DINF-1303 | قسم أمن المعلومات</p>
+                <div class="week-indicator">الأسبوع السادس من 12 أسبوع</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- التنقل السريع -->
+        <nav class="quick-nav">
+            <div class="nav-links">
+                <a href="#section1">مقدمة عن while</a>
+                <a href="#section2">while loop</a>
+                <a href="#section3">do-while loop</a>
+                <a href="#section4">التحقق من صحة المدخلات</a>
+                <a href="#section5">التطبيقات العملية</a>
+                <a href="#assignments">الواجبات</a>
+            </div>
+        </nav>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- القسم 1: مقدمة عن while -->
+            <section id="section1" class="section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">مقدمة عن while loop</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">متى نستخدم while؟</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>while loop:</strong> تستخدم عندما لا نعرف عدد مرات التكرار مسبقاً، ونريد الاستمرار في التكرار طالما أن شرطاً معيناً محققاً.
+                            </div>
+                            <p>مثال: استمر في قراءة الأرقام من المستخدم حتى يدخل رقم سالب. لا نعرف عدد الأرقام مسبقاً، لذلك while هي الأنسب.</p>
+                            <div class="flow-diagram">
+                                <div class="flow-step">بداية</div>
+                                <span class="flow-arrow">←</span>
+                                <div class="flow-step">تحقق من الشرط</div>
+                                <span class="flow-arrow">←</span>
+                                <div class="flow-step" style="background-color: #27ae60;">نفذ الكود (إذا الشرط صحيح)</div>
+                                <span class="flow-arrow">←</span>
+                                <div class="flow-step">عد للتحقق</div>
+                                <span class="flow-arrow">←</span>
+                                <div class="flow-step" style="background-color: #e74c3c;">نهاية (إذا الشرط خطأ)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- القسم 2: while loop -->
+            <section id="section2" class="section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">جملة while</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">التركيب الأساسي</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="keyword">while</span> (<span class="comment">// الشرط</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// كتلة التعليمات التي تتكرر</span><br>
+                                }
+                            </div>
+                            <ul>
+                                <li>يتم التحقق من الشرط <strong>قبل</strong> كل تكرار.</li>
+                                <li>إذا كان الشرط <code>true</code>، يُنفذ الكود ثم يعود للتحقق من الشرط مرة أخرى.</li>
+                                <li>إذا كان الشرط <code>false</code>، تخرج الحلقة ويستمر البرنامج.</li>
+                                <li>يجب أن يحتوي الكود على تحديث للمتغيرات التي تؤثر على الشرط، وإلا ستكون الحلقة لا نهائية.</li>
+                            </ul>
+
+                            <h4>مثال: طباعة الأرقام من 1 إلى 5</h4>
+                            <div class="code-example">
+                                <span class="type">int</span> <span class="variable">i</span> = <span class="string">1</span>;<br>
+                                <span class="keyword">while</span> (<span class="variable">i</span> <= <span class="string">5</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"i = "</span> + <span class="variable">i</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">i</span>++; <span class="comment">// تحديث العداد - مهم جداً!</span><br>
+                                }
+                            </div>
+
+                            <div class="warning">
+                                <strong>تحذير:</strong> إذا نسيت تحديث العداد (i++) ستصبح الحلقة لا نهائية (infinite loop) وقد يتجمد البرنامج.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="topic">
+                        <h3 class="topic-title">أمثلة إضافية</h3>
+                        <div class="topic-content">
+                            <div class="code-example">
+                                <span class="comment">// مثال 1: جمع الأرقام من 1 إلى 100 باستخدام while</span><br>
+                                <span class="type">int</span> <span class="variable">i</span> = <span class="string">1</span>, <span class="variable">sum</span> = <span class="string">0</span>;<br>
+                                <span class="keyword">while</span> (<span class="variable">i</span> <= <span class="string">100</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">sum</span> += <span class="variable">i</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">i</span>++;<br>
+                                }<br>
+                                System.out.<span class="function">println</span>(<span class="string">"المجموع = "</span> + <span class="variable">sum</span>);<br><br>
+
+                                <span class="comment">// مثال 2: قراءة أرقام حتى يدخل المستخدم صفر</span><br>
+                                <span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br>
+                                <span class="type">int</span> <span class="variable">num</span>;<br>
+                                <span class="keyword">while</span> ((<span class="variable">num</span> = <span class="variable">scanner</span>.nextInt()) != <span class="string">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"أدخلت: "</span> + <span class="variable">num</span>);<br>
+                                }<br>
+                                System.out.<span class="function">println</span>(<span class="string">"انتهى الإدخال."</span>);
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- القسم 3: do-while loop -->
+            <section id="section3" class="section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">جملة do-while</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">التركيب والفرق عن while</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>do-while:</strong> تشبه while ولكن الفرق الأساسي هو أنها تُنفذ الكود <strong>مرة واحدة على الأقل</strong> قبل التحقق من الشرط.
+                            </div>
+                            <div class="code-example">
+                                <span class="keyword">do</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// كتلة التعليمات (تُنفذ مرة على الأقل)</span><br>
+                                } <span class="keyword">while</span> (<span class="comment">// الشرط</span>);
+                            </div>
+                            <p>يتم التنفيذ أولاً، ثم التحقق من الشرط. إذا كان الشرط true، نكرر، وإلا نخرج.</p>
+
+                            <h4>مثال: محاكاة قائمة طلب حتى يختار المستخدم الخروج</h4>
+                            <div class="code-example">
+                                <span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br>
+                                <span class="type">int</span> <span class="variable">choice</span>;<br>
+                                <span class="keyword">do</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"1. خيار 1\n2. خيار 2\n0. خروج"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"اختر: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">choice</span> = <span class="variable">scanner</span>.nextInt();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">choice</span> == <span class="string">1</span>) System.out.<span class="function">println</span>(<span class="string">"نفذ الأمر 1"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else if</span> (<span class="variable">choice</span> == <span class="string">2</span>) System.out.<span class="function">println</span>(<span class="string">"نفذ الأمر 2"</span>);<br>
+                                } <span class="keyword">while</span> (<span class="variable">choice</span> != <span class="string">0</span>);
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="while-comparison">
+                        <div class="while-card">
+                            <h4>while</h4>
+                            <ul>
+                                <li>يتم التحقق من الشرط أولاً.</li>
+                                <li>قد لا يُنفذ الكود أبداً إذا كان الشرط false من البداية.</li>
+                                <li>مناسب عندما قد لا نحتاج للتكرار إطلاقاً.</li>
+                            </ul>
+                        </div>
+                        <div class="while-card">
+                            <h4>do-while</h4>
+                            <ul>
+                                <li>يتم التنفيذ أولاً ثم التحقق.</li>
+                                <li>يُنفذ الكود مرة واحدة على الأقل.</li>
+                                <li>مناسب عندما نريد تنفيذ الكود مرة قبل التحقق (مثل عرض قائمة).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- القسم 4: التحقق من صحة المدخلات -->
+            <section id="section4" class="section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">التحقق من صحة المدخلات (Validation)</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">استخدام while للتحقق من الإدخال</h3>
+                        <div class="topic-content">
+                            <p>من أشهر استخدامات while هو تكرار طلب الإدخال حتى يحصل البرنامج على قيمة صحيحة.</p>
+                            <div class="validation-example">
+                                <strong>مثال: طلب إدخال رقم موجب</strong>
+                            </div>
+                            <div class="code-example">
+                                <span class="type">Scanner</span> <span class="variable">scanner</span> = <span class="keyword">new</span> <span class="type">Scanner</span>(System.in);<br>
+                                <span class="type">int</span> <span class="variable">number</span>;<br>
+                                System.out.<span class="function">print</span>(<span class="string">"أدخل رقماً موجباً: "</span>);<br>
+                                <span class="variable">number</span> = <span class="variable">scanner</span>.nextInt();<br>
+                                <span class="keyword">while</span> (<span class="variable">number</span> <= <span class="string">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"خطأ! الرقم يجب أن يكون موجباً. أعد الإدخال: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">number</span> = <span class="variable">scanner</span>.nextInt();<br>
+                                }<br>
+                                System.out.<span class="function">println</span>(<span class="string">"شكراً، أدخلت: "</span> + <span class="variable">number</span>);
+                            </div>
+                            <p>يمكن أيضاً استخدام do-while لتجنب تكرار سطر قراءة الرقم مرتين:</p>
+                            <div class="code-example">
+                                <span class="type">int</span> <span class="variable">number</span>;<br>
+                                <span class="keyword">do</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل رقماً موجباً: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">number</span> = <span class="variable">scanner</span>.nextInt();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">number</span> <= <span class="string">0</span>) System.out.<span class="function">println</span>(<span class="string">"رقم غير صالح."</span>);<br>
+                                } <span class="keyword">while</span> (<span class="variable">number</span> <= <span class="string">0</span>);
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- القسم 5: التطبيقات العملية -->
+            <section id="section5" class="section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">تطبيقات عملية متكاملة</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">تطبيق 1: نظام الإدخال المستمر (حساب المتوسط)</h3>
+                        <div class="topic-content">
+                            <p>برنامج يقرأ درجات الطلاب باستمرار حتى يدخل المستخدم -1، ثم يحسب المتوسط.</p>
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                <span class="keyword">public class</span> AverageUntilSentinel {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scanner scanner = <span class="keyword">new</span> Scanner(System.in);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> sum = <span class="string">0</span>, count = <span class="string">0</span>, grade;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"أدخل الدرجات ( -1 للخروج ):"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> (<span class="keyword">true</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grade = scanner.nextInt();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (grade == -<span class="string">1</span>) <span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum += grade;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count++;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (count > <span class="string">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"المجموع = %d\nالمتوسط = %.2f\n"</span>, sum, (<span class="type">double</span>)sum/count);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"لم يتم إدخال أي درجات."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.close();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="topic">
+                        <h3 class="topic-title">تطبيق 2: محاكاة سحب أرقام (يانصيب)</h3>
+                        <div class="topic-content">
+                            <p>برنامج يحاكي سحب رقم عشوائي ويطلب من المستخدم تخمينه مع إعطاء محاولات غير محدودة حتى يصيب.</p>
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br>
+                                <span class="keyword">import</span> java.util.Random;<br><br>
+                                <span class="keyword">public class</span> LotterySimulation {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random rand = <span class="keyword">new</span> Random();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> secret = rand.nextInt(<span class="string">100</span>) + <span class="string">1</span>; <span class="comment">// رقم سري 1-100</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scanner scanner = <span class="keyword">new</span> Scanner(System.in);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> guess;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> attempts = <span class="string">0</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"تخمين الرقم السري (بين 1 و 100):"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">do</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل تخمينك: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;guess = scanner.nextInt();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attempts++;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (guess < secret) System.out.<span class="function">println</span>(<span class="string">"أكبر من ذلك."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else if</span> (guess > secret) System.out.<span class="function">println</span>(<span class="string">"أصغر من ذلك."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">while</span> (guess != secret);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"تهانينا! لقد خمنت الرقم %d بعد %d محاولة.\n"</span>, secret, attempts);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.close();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="topic">
+                        <h3 class="topic-title">تطبيق 3: محاكاة نظام تسجيل الدخول (3 محاولات)</h3>
+                        <div class="topic-content">
+                            <div class="attempt-box">
+                                <strong>فكرة:</strong> المستخدم لديه 3 محاولات لإدخال كلمة السر الصحيحة. بعدها يتم قفل النظام.
+                            </div>
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                <span class="keyword">public class</span> LoginSystem {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scanner scanner = <span class="keyword">new</span> Scanner(System.in);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">final</span> String USERNAME = <span class="string">"admin"</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">final</span> String PASSWORD = <span class="string">"1234"</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> attempts = <span class="string">3</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">boolean</span> loggedIn = <span class="keyword">false</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> (attempts > <span class="string">0</span> && !loggedIn) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"اسم المستخدم: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String user = scanner.nextLine();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"كلمة السر: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String pass = scanner.nextLine();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (user.equals(USERNAME) && pass.equals(PASSWORD)) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loggedIn = <span class="keyword">true</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attempts--;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"خطأ. المحاولات المتبقية: "</span> + attempts);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (loggedIn) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"مرحباً، تم تسجيل الدخول بنجاح."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"تم تجاوز عدد المحاولات المسموح. النظام مغلق."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.close();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- الواجبات -->
+            <section id="assignments" class="assignments">
+                <h3>الواجبات والتطبيقات العملية للأسبوع السادس</h3>
+
+                <div class="topic">
+                    <h3 class="topic-title">الواجب الأول: محاكي سحب أرقام اليانصيب (متقدم)</h3>
+                    <div class="topic-content">
+                        <ul class="task-list">
+                            <li>قم بتطوير برنامج يختار رقمًا عشوائيًا سريًا بين 1 و 50.</li>
+                            <li>يطلب من المستخدم تخمين الرقم، ويعطي تلميحات (أكبر/أصغر).</li>
+                            <li>استخدم while loop للاستمرار حتى يصيب المستخدم.</li>
+                            <li>احسب عدد المحاولات واعرضه في النهاية.</li>
+                            <li>أضف خياراً للخروج من اللعبة بإدخال 0.</li>
+                            <li>تأكد من أن المدخلات ضمن النطاق المطلوب (بين 1 و 50 أو 0 للخروج).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3 class="topic-title">الواجب الثاني: برنامج حساب متوسط الدرجات حتى -1</h3>
+                    <div class="topic-content">
+                        <ul class="task-list">
+                            <li>اكتب برنامجاً يقرأ درجات الطلاب باستمرار (أعداد صحيحة).</li>
+                            <li>يتوقف الإدخال عندما يدخل المستخدم -1.</li>
+                            <li>احسب وأطبع:
+                                <ul style="padding-right: 20px;">
+                                    <li>مجموع الدرجات.</li>
+                                    <li>عدد الطلاب.</li>
+                                    <li>المتوسط الحسابي.</li>
+                                    <li>أعلى درجة.</li>
+                                    <li>أدنى درجة.</li>
+                                    <li>عدد الطلاب الناجحين (≥ 50).</li>
+                                </ul>
+                            </li>
+                            <li>تأكد من تجاهل القيمة -1 من الحسابات.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3 class="topic-title">الواجب الثالث: محاكاة نظام تسجيل الدخول (3 محاولات) محسّن</h3>
+                    <div class="topic-content">
+                        <ul class="task-list">
+                            <li>طبق نظام تسجيل الدخول بثلاث محاولات كما في التطبيق.</li>
+                            <li>قم بتوسيعه بحيث:
+                                <ul style="padding-right: 20px;">
+                                    <li>بعد كل محاولة فاشلة، يعرض عدد المحاولات المتبقية.</li>
+                                    <li>بعد انتهاء المحاولات، يطلب من المستخدم الانتظار (محاكاة) لمدة 5 ثوانٍ ثم يسمح له بمحاولة جديدة (تحدي إضافي).</li>
+                                    <li>يمكنك استخدام <code>Thread.sleep(5000);</code> ولكن يجب معالجة الاستثناء (try-catch) أو البحث عن طريقة بديلة.</li>
+                                </ul>
+                            </li>
+                            <li>إذا نجح تسجيل الدخول، رحب بالمستخدم.</li>
+                            <li>إذا فشل بعد 3 محاولات، اعرض رسالة إغلاق.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 25px; padding: 15px; background-color: white; border-radius: 8px;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 10px;">تعليمات التسليم:</h4>
+                    <ul style="padding-right: 20px;">
+                        <li>كل واجب في مشروع NetBeans منفصل (Week6_Assignment1, Week6_Assignment2, Week6_Assignment3).</li>
+                        <li>تصوير الكود (screenshot) بجودة عالية.</li>
+                        <li>تحويل جميع الصور إلى ملف PDF واحد.</li>
+                        <li>رفع الملف على الصف الدراسي.</li>
+                        <li>موعد التسليم: يحدد لاحقاً.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <h3>الأسبوع السادس - الحلقات التكرارية (while loop)</h3>
+            <br>
+            <p>مساق لغة برمجة جافا | DINF-1303</p>
+
+            <div class="footer-info">
+                <div class="footer-item">
+                    <h4>اسم المدرس</h4>
+                    <p>م. محمود وليد الشيخ خليل</p>
+                </div>
+                <div class="footer-item">
+                    <h4>البريد الإلكتروني</h4>
+                    <p>makhalil@ucas.edu.ps</p>
+                </div>
+                <div class="footer-item">
+                    <h4>القسم</h4>
+                    <p>أمن المعلومات</p>
+                </div>
+                <div class="footer-item">
+                    <h4>الكلية</h4>
+                    <p>الكلية الجامعية للعلوم التطبيقية</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 30px; color: #bdc3c7; font-size: 0.9rem;">
+                © 2026 سايبر خليل - جميع الحقوق محفوظة.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // سكريبت التنقل السلس
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
