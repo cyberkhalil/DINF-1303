@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسبوع السابع - المصفوفات (Arrays) | DINF-1303</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* أنماط خاصة بتمثيل المصفوفات */
+        .array-visual {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        .array-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            direction: ltr; /* لعرض المصفوفة من اليسار لليمين */
+        }
+        .array-cell {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-weight: bold;
+        }
+        .array-cell .index {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        .array-cell .value {
+            font-size: 1.2rem;
+        }
+        .array-caption {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        .code-inline {
+            background-color: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            direction: ltr;
+            display: inline-block;
+        }
+        .array-declaration-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .array-declaration-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px;
+        }
+        .array-declaration-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: right;
+        }
+        .array-declaration-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <h1>الأسبوع السابع: المصفوفات (Arrays)</h1>
+                <p>مساق لغة برمجة جافا - DINF-1303 | قسم أمن المعلومات</p>
+                <div class="week-indicator">الأسبوع السابع من 12 أسبوع</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- التنقل السريع -->
+        <nav class="quick-nav">
+            <div class="nav-links">
+                <a href="#section1">مفهوم المصفوفات</a>
+                <a href="#section2">تعريف وتهيئة</a>
+                <a href="#section3">الولوج والتعديل</a>
+                <a href="#section4">المصفوفات أحادية البعد</a>
+                <a href="#section5">تطبيقات عملية</a>
+                <a href="#assignments">الواجبات</a>
+            </div>
+        </nav>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- القسم 1: مفهوم المصفوفات -->
+            <section id="section1" class="section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">مفهوم المصفوفات وأهميتها</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">ما هي المصفوفة؟</h3>
+                        <div class="topic-content">
+                            <div class="definition">
+                                <strong>المصفوفة (Array):</strong> هي مجموعة من العناصر من نفس النوع، مخزنة في مواقع متتالية في الذاكرة، ويمكن الوصول إلى كل عنصر باستخدام رقم دليل (index).
+                            </div>
+                            <p>تخيل أنك تريد تخزين 100 درجة طالب. بدلاً من إنشاء 100 متغير منفصل (grade1, grade2, ...)، يمكنك إنشاء مصفوفة واحدة تحتوي على 100 درجة.</p>
+
+                            <div class="array-visual">
+                                <div class="array-container">
+                                    <div class="array-cell">
+                                        <span class="value">85</span>
+                                        <span class="index">[0]</span>
+                                    </div>
+                                    <div class="array-cell">
+                                        <span class="value">90</span>
+                                        <span class="index">[1]</span>
+                                    </div>
+                                    <div class="array-cell">
+                                        <span class="value">76</span>
+                                        <span class="index">[2]</span>
+                                    </div>
+                                    <div class="array-cell">
+                                        <span class="value">88</span>
+                                        <span class="index">[3]</span>
+                                    </div>
+                                    <div class="array-cell">
+                                        <span class="value">92</span>
+                                        <span class="index">[4]</span>
+                                    </div>
+                                </div>
+                                <div class="array-caption">مصفوفة من الأعداد الصحيحة (int[]) تحمل 5 درجات</div>
+                                <p>يبدأ الترقيم (index) من <strong>0</strong>، لذا العنصر الأول في الموضع 0، والأخير في الموضع (الطول - 1).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- القسم 2: تعريف وتهيئة المصفوفات -->
+            <section id="section2" class="section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">طريقة تعريف وتهيئة المصفوفات</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">طرق تعريف المصفوفة</h3>
+                        <div class="topic-content">
+                            <table class="array-declaration-table">
+                                <thead>
+                                    <tr>
+                                        <th>الطريقة</th>
+                                        <th>مثال</th>
+                                        <th>شرح</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>تعريف فقط</td>
+                                        <td><span class="code-inline">int[] numbers;</span></td>
+                                        <td>يُعرِّف مصفوفة من الأعداد الصحيحة، لكنها غير مهيأة (null).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تعريف مع تحديد الحجم</td>
+                                        <td><span class="code-inline">int[] numbers = new int[5];</span></td>
+                                        <td>ينشئ مصفوفة تتسع لـ 5 أعداد، جميعها قيمتها الافتراضية 0.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تعريف مع قيم أولية</td>
+                                        <td><span class="code-inline">int[] numbers = {10, 20, 30, 40, 50};</span></td>
+                                        <td>ينشئ مصفوفة حجمها 5 ويضع القيم المعطاة.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تعريف باستخدام new مع قيم</td>
+                                        <td><span class="code-inline">int[] numbers = new int[]{1,2,3};</span></td>
+                                        <td>طريقة أخرى للتهيئة بالقيم.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="code-example">
+                                <span class="comment">// أمثلة عملية</span><br>
+                                <span class="comment">// 1. مصفوفة أعداد صحيحة بحجم 10 (جميعها 0)</span><br>
+                                <span class="type">int</span>[] <span class="variable">scores</span> = <span class="keyword">new</span> <span class="type">int</span>[<span class="string">10</span>];<br><br>
+
+                                <span class="comment">// 2. مصفوفة نصية بأسماء</span><br>
+                                <span class="type">String</span>[] <span class="variable">names</span> = {<span class="string">"أحمد"</span>, <span class="string">"محمد"</span>, <span class="string">"سارة"</span>, <span class="string">"فاطمة"</span>};<br><br>
+
+                                <span class="comment">// 3. مصفوفة من القيم المنطقية</span><br>
+                                <span class="type">boolean</span>[] <span class="variable">flags</span> = <span class="keyword">new</span> <span class="type">boolean</span>[<span class="string">3</span>]; <span class="comment">// false, false, false</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- القسم 3: الولوج والتعديل -->
+            <section id="section3" class="section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">الولوج للعناصر والتعديل عليها</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">الوصول إلى العناصر باستخدام index</h3>
+                        <div class="topic-content">
+                            <p>يمكن الوصول إلى عنصر معين باستخدام اسم المصفوفة متبوعاً بالرقم الدليلي بين قوسين مربعين <code>[]</code>.</p>
+
+                            <div class="code-example">
+                                <span class="type">int</span>[] <span class="variable">numbers</span> = {<span class="string">10</span>, <span class="string">20</span>, <span class="string">30</span>, <span class="string">40</span>, <span class="string">50</span>};<br><br>
+
+                                <span class="comment">// قراءة قيمة العنصر الأول (index 0)</span><br>
+                                <span class="type">int</span> <span class="variable">first</span> = <span class="variable">numbers</span>[<span class="string">0</span>]; <span class="comment">// 10</span><br><br>
+
+                                <span class="comment">// تعديل العنصر الثالث (index 2)</span><br>
+                                <span class="variable">numbers</span>[<span class="string">2</span>] = <span class="string">100</span>; <span class="comment">// الآن المصفوفة: {10,20,100,40,50}</span><br><br>
+
+                                <span class="comment">// طباعة جميع العناصر باستخدام حلقة for</span><br>
+                                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="string">0</span>; <span class="variable">i</span> < <span class="variable">numbers</span>.length; <span class="variable">i</span>++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"numbers["</span> + <span class="variable">i</span> + <span class="string">"] = "</span> + <span class="variable">numbers</span>[<span class="variable">i</span>]);<br>
+                                }
+                            </div>
+
+                            <div class="warning">
+                                <strong>تنبيه:</strong> الوصول إلى index خارج حدود المصفوفة (أقل من 0 أو أكبر من أو يساوي length) يسبب خطأ <span class="code-inline">ArrayIndexOutOfBoundsException</span>.
+                            </div>
+
+                            <h4>خاصية length</h4>
+                            <p>كل مصفوفة في جافا تمتلك خاصية <code>length</code> تعطي عدد عناصرها.</p>
+                            <div class="code-example">
+                                <span class="type">int</span>[] <span class="variable">arr</span> = {<span class="string">2</span>,<span class="string">4</span>,<span class="string">6</span>,<span class="string">8</span>};<br>
+                                System.out.<span class="function">println</span>(<span class="string">"طول المصفوفة = "</span> + <span class="variable">arr</span>.length); <span class="comment">// 4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- القسم 4: المصفوفات أحادية البعد -->
+            <section id="section4" class="section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">المصفوفات أحادية البعد</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">التفاصيل والعمليات الأساسية</h3>
+                        <div class="topic-content">
+                            <p>المصفوفات أحادية البعد هي الأكثر شيوعاً، ويمكن إجراء العديد من العمليات عليها باستخدام الحلقات.</p>
+
+                            <h4>مثال: إدخال عناصر المصفوفة من المستخدم</h4>
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                <span class="keyword">public class</span> InputArray {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scanner scanner = <span class="keyword">new</span> Scanner(System.in);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span>[] <span class="variable">numbers</span> = <span class="keyword">new</span> <span class="type">int</span>[<span class="string">5</span>];<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"أدخل 5 أرقام:"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="string">0</span>; <span class="variable">i</span> < <span class="variable">numbers</span>.length; <span class="variable">i</span>++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"الرقم "</span> + (<span class="variable">i</span>+<span class="string">1</span>) + <span class="string">": "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">numbers</span>[<span class="variable">i</span>] = scanner.nextInt();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"القيم المدخلة:"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">num</span> : <span class="variable">numbers</span>) { <span class="comment">// enhanced for</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="variable">num</span> + <span class="string">" "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.close();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+
+                            <div class="note">
+                                <strong>ملاحظة:</strong> الحلقة المحسّنة <code>for-each</code> تستخدم لقراءة العناصر فقط، ولا يمكن تعديل المصفوفة من خلالها.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- القسم 5: تطبيقات عملية -->
+            <section id="section5" class="section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">تطبيقات عملية</h2>
+                </div>
+                <div class="section-content">
+                    <div class="topic">
+                        <h3 class="topic-title">تطبيق 1: إدارة درجات الطلاب</h3>
+                        <div class="topic-content">
+                            <p>برنامج يقرأ درجات عدد محدد من الطلاب، ثم يحسب المتوسط، أعلى درجة، أدنى درجة.</p>
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                <span class="keyword">public class</span> GradesManager {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scanner scanner = <span class="keyword">new</span> Scanner(System.in);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل عدد الطلاب: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">n</span> = scanner.nextInt();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span>[] <span class="variable">grades</span> = <span class="keyword">new</span> <span class="type">int</span>[<span class="variable">n</span>];<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">sum</span> = <span class="string">0</span>, <span class="variable">max</span> = Integer.MIN_VALUE, <span class="variable">min</span> = Integer.MAX_VALUE;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"أدخل درجات الطلاب:"</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="string">0</span>; <span class="variable">i</span> < <span class="variable">grades</span>.length; <span class="variable">i</span>++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"درجة الطالب "</span> + (<span class="variable">i</span>+<span class="string">1</span>) + <span class="string">": "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">grades</span>[<span class="variable">i</span>] = scanner.nextInt();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum += <span class="variable">grades</span>[<span class="variable">i</span>];<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">grades</span>[<span class="variable">i</span>] > <span class="variable">max</span>) max = <span class="variable">grades</span>[<span class="variable">i</span>];<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">grades</span>[<span class="variable">i</span>] < <span class="variable">min</span>) min = <span class="variable">grades</span>[<span class="variable">i</span>];<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">printf</span>(<span class="string">"المتوسط = %.2f\n"</span>, (<span class="type">double</span>)sum/<span class="variable">n</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"أعلى درجة = "</span> + max);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"أدنى درجة = "</span> + min);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.close();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="topic">
+                        <h3 class="topic-title">تطبيق 2: تخزين أسماء المستخدمين والبحث</h3>
+                        <div class="topic-content">
+                            <p>برنامج يخزن أسماء المستخدمين في مصفوفة، ثم يسمح بالبحث عن اسم معين.</p>
+                            <div class="code-example">
+                                <span class="keyword">import</span> java.util.Scanner;<br><br>
+                                <span class="keyword">public class</span> NameSearch {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] args) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scanner scanner = <span class="keyword">new</span> Scanner(System.in);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">String</span>[] <span class="variable">names</span> = {<span class="string">"أحمد"</span>, <span class="string">"محمد"</span>, <span class="string">"سارة"</span>, <span class="string">"فاطمة"</span>, <span class="string">"يوسف"</span>};<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">print</span>(<span class="string">"أدخل اسمًا للبحث: "</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">String</span> <span class="variable">target</span> = scanner.nextLine();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">boolean</span> <span class="variable">found</span> = <span class="keyword">false</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="string">0</span>; <span class="variable">i</span> < <span class="variable">names</span>.length; <span class="variable">i</span>++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">names</span>[<span class="variable">i</span>].equals(<span class="variable">target</span>)) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.<span class="function">println</span>(<span class="string">"تم العثور على الاسم في الفهرس "</span> + <span class="variable">i</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;found = <span class="keyword">true</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (!found) System.out.<span class="function">println</span>(<span class="string">"الاسم غير موجود."</span>);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.close();<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- الواجبات -->
+            <section id="assignments" class="assignments">
+                <h3>الواجبات والتطبيقات العملية للأسبوع السابع</h3>
+
+                <div class="topic">
+                    <h3 class="topic-title">الواجب الأول: برنامج إيجاد أكبر وأصغر عدد في مصفوفة</h3>
+                    <div class="topic-content">
+                        <ul class="task-list">
+                            <li>اكتب برنامجاً يطلب من المستخدم إدخال عدد العناصر (n).</li>
+                            <li>ينشئ مصفوفة أعداد صحيحة بحجم n.</li>
+                            <li>يقرأ n عدداً من المستخدم ويخزنها في المصفوفة.</li>
+                            <li>يبحث عن أكبر قيمة وأصغر قيمة في المصفوفة.</li>
+                            <li>اطبع القيم مع فهارسها (أين توجد أكبر وأصغر قيمة).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3 class="topic-title">الواجب الثاني: برنامج حساب متوسط عناصر المصفوفة</h3>
+                    <div class="topic-content">
+                        <ul class="task-list">
+                            <li>أنشئ مصفوفة من 10 أعداد صحيحة (يمكن إدخالها من المستخدم أو تعيينها مسبقاً).</li>
+                            <li>احسب متوسط هذه الأعداد.</li>
+                            <li>اطبع جميع العناصر الأكبر من المتوسط.</li>
+                            <li>استخدم الحلقة for-each للعرض.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3 class="topic-title">الواجب الثالث: برنامج بحث عن اسم في مصفوفة أسماء</h3>
+                    <div class="topic-content">
+                        <ul class="task-list">
+                            <li>قم بتعريف مصفوفة نصوص (String[]) تحتوي على 7 أسماء (من اختيارك).</li>
+                            <li>اطلب من المستخدم إدخال اسم للبحث.</li>
+                            <li>ابحث في المصفوفة عن الاسم (ignore case).</li>
+                            <li>إذا وجد، اطبع "الاسم موجود في الفهرس X".</li>
+                            <li>إذا لم يوجد، اطبع "الاسم غير موجود".</li>
+                            <li>تأكد من استخدام <code>equalsIgnoreCase()</code> للمقارنة.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 25px; padding: 15px; background-color: white; border-radius: 8px;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 10px;">تعليمات التسليم:</h4>
+                    <ul style="padding-right: 20px;">
+                        <li>كل واجب في مشروع NetBeans منفصل (Week7_Assignment1, Week7_Assignment2, Week7_Assignment3).</li>
+                        <li>تصوير الكود (screenshot) بجودة عالية.</li>
+                        <li>تحويل جميع الصور إلى ملف PDF واحد.</li>
+                        <li>رفع الملف على الصف الدراسي.</li>
+                        <li>موعد التسليم: يحدد لاحقاً.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <h3>الأسبوع السابع - المصفوفات (Arrays) - الجزء الأول</h3>
+            <br>
+            <p>مساق لغة برمجة جافا | DINF-1303</p>
+
+            <div class="footer-info">
+                <div class="footer-item">
+                    <h4>اسم المدرس</h4>
+                    <p>م. محمود وليد الشيخ خليل</p>
+                </div>
+                <div class="footer-item">
+                    <h4>البريد الإلكتروني</h4>
+                    <p>makhalil@ucas.edu.ps</p>
+                </div>
+                <div class="footer-item">
+                    <h4>القسم</h4>
+                    <p>أمن المعلومات</p>
+                </div>
+                <div class="footer-item">
+                    <h4>الكلية</h4>
+                    <p>الكلية الجامعية للعلوم التطبيقية</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 30px; color: #bdc3c7; font-size: 0.9rem;">
+                © 2026 سايبر خليل - جميع الحقوق محفوظة.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // سكريبت التنقل السلس
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
