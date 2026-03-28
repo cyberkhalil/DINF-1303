@@ -223,7 +223,8 @@
 </div>
 
 <script>
-    let examActive = false;
+    let examActive = false;      // هل الاختبار جاري (الوقت لم ينته)
+    let examStarted = false;     // هل تم بدء الاختبار (بغض النظر عن الوقت)
     let timerInterval = null;
     let endTime = null;
     let examBuilt = false;
@@ -268,12 +269,11 @@
             if (remaining <= 0) {
                 clearInterval(timerInterval);
                 disableAllInputs(true);
-                alert("انتهى الوقت! لا يمكنك تعديل الإجابات بعد الآن. يمكنك تحميل الحل كـ PDF.");
                 examActive = false;
+                alert("انتهى الوقت! لا يمكنك تعديل الإجابات بعد الآن. يمكنك تحميل الحل كـ PDF.");
                 localStorage.removeItem('examStartTime');
                 document.getElementById('startExamBtn').disabled = true;
-                document.getElementById('printPdfBtnTop').disabled = false;
-                if (window.bottomPrintBtn) window.bottomPrintBtn.disabled = false;
+                // لا نغير حالة examStarted، يبقى true
             }
             updateTimerDisplay();
         }, 1000);
@@ -288,6 +288,7 @@
             const duration = 3600000;
             if (elapsed < duration) {
                 examActive = true;
+                examStarted = true;
                 endTime = start + duration;
                 updateTimerDisplay();
                 if (timerInterval) clearInterval(timerInterval);
@@ -296,12 +297,10 @@
                     if (remaining <= 0) {
                         clearInterval(timerInterval);
                         disableAllInputs(true);
-                        alert("انتهى الوقت! لا يمكن تعديل الإجابات.");
                         examActive = false;
+                        alert("انتهى الوقت! لا يمكن تعديل الإجابات.");
                         localStorage.removeItem('examStartTime');
                         document.getElementById('startExamBtn').disabled = true;
-                        document.getElementById('printPdfBtnTop').disabled = false;
-                        if (window.bottomPrintBtn) window.bottomPrintBtn.disabled = false;
                     }
                     updateTimerDisplay();
                 }, 1000);
@@ -396,7 +395,6 @@
                     radioGroup.querySelectorAll('input').forEach(radio => {
                         radio.addEventListener('change', () => {
                             if (radio.checked) {
-                                // تحويل القيمة المخزنة إلى نص عربي للطباعة
                                 printSpan.innerText = radio.value === 'True' ? 'صحيح' : 'خطأ';
                             }
                         });
@@ -480,7 +478,6 @@
                 container.appendChild(card);
             }
 
-            // إضافة زر الطباعة السفلي
             const bottomPrintDiv = document.createElement('div');
             bottomPrintDiv.className = 'button-group no-print';
             bottomPrintDiv.innerHTML = `<button id="printPdfBtnBottomDynamic" class="btn btn-primary" disabled><i class="fas fa-print"></i> تحميل الحل كـ PDF</button>`;
@@ -488,7 +485,10 @@
             const bottomBtn = document.getElementById('printPdfBtnBottomDynamic');
             if (bottomBtn) {
                 bottomBtn.disabled = true;
-                bottomBtn.addEventListener('click', () => { if (examActive) window.print(); else alert("لا يمكن طباعة الحل قبل بدء الاختبار."); });
+                bottomBtn.addEventListener('click', () => {
+                    if (examStarted) window.print();
+                    else alert("لا يمكن طباعة الحل قبل بدء الاختبار.");
+                });
                 window.bottomPrintBtn = bottomBtn;
             }
 
@@ -502,7 +502,7 @@
     }
 
     async function startExam() {
-        if (examActive) return;
+        if (examStarted) return;
         if (!examBuilt) {
             const success = await buildExamFromXML();
             if (!success) return;
@@ -511,6 +511,7 @@
         disableAllInputs(false);
         startTimer(3600);
         examActive = true;
+        examStarted = true;
         document.getElementById('startExamBtn').disabled = true;
         document.getElementById('printPdfBtnTop').disabled = false;
         if (window.bottomPrintBtn) window.bottomPrintBtn.disabled = false;
@@ -524,7 +525,7 @@
             await buildExamFromXML();
             lockStudentInfo(true);
             disableAllInputs(false);
-            examActive = true;
+            examStarted = true;
             document.getElementById('startExamBtn').disabled = true;
             document.getElementById('printPdfBtnTop').disabled = false;
             if (window.bottomPrintBtn) window.bottomPrintBtn.disabled = false;
@@ -534,7 +535,7 @@
         }
         document.getElementById('startExamBtn').addEventListener('click', startExam);
         document.getElementById('printPdfBtnTop').addEventListener('click', () => {
-            if (examActive) window.print();
+            if (examStarted) window.print();
             else alert("لا يمكن طباعة الحل قبل بدء الاختبار.");
         });
     };
