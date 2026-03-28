@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="category">
+    <category>
+      <text>$course$/top/الامتحان النهائي - برمجة 1 (جافا)</text>
+    </category>
+  </question>
+
+  <!-- ===================== SECTION 1: TRUE/FALSE (20 questions) ===================== -->
+  <question type="truefalse">
+    <name><text>TF1: تعريف البرنامج</text></name>
+    <questiontext format="html"><text>&lt;p&gt;البرنامج هو مجموعة من التعليمات التي ينفذها الحاسوب لتنفيذ مهام محددة.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF2: JDK و JVM</text></name>
+    <questiontext format="html"><text>&lt;p&gt;JVM (Java Virtual Machine) هي المسؤولة عن تحويل الكود المصدري (.java) إلى بايت كود (.class).&lt;/p&gt;</text></questiontext>
+    <answer fraction="0"><text>true</text></answer>
+    <answer fraction="100"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF3: أنواع البيانات الأولية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;من أنواع البيانات الأولية في جافا: int, double, boolean, String.&lt;/p&gt;</text></questiontext>
+    <answer fraction="0"><text>true</text></answer>
+    <answer fraction="100"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF4: قواعد تسمية المتغيرات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;في جافا، يمكن أن يبدأ اسم المتغير برقم.&lt;/p&gt;</text></questiontext>
+    <answer fraction="0"><text>true</text></answer>
+    <answer fraction="100"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF5: معامل الزيادة ++</text></name>
+    <questiontext format="html"><text>&lt;p&gt;إذا كان لدينا int x = 5; ثم x++; فإن قيمة x تصبح 6.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF6: أولوية العمليات الحسابية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;في جافا، عمليات الضرب والقسمة لها أولوية أعلى من الجمع والطرح.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF7: جملة if-else</text></name>
+    <questiontext format="html"><text>&lt;p&gt;جملة if-else تسمح بتنفيذ كتلة تعليمات واحدة فقط من كتلتين بناءً على شرط.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF8: الشرط المنطقي &amp;&amp;</text></name>
+    <questiontext format="html"><text>&lt;p&gt;الشرط (true &amp;&amp; false) يعيد true.&lt;/p&gt;</text></questiontext>
+    <answer fraction="0"><text>true</text></answer>
+    <answer fraction="100"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF9: جملة switch-case</text></name>
+    <questiontext format="html"><text>&lt;p&gt;في switch-case، إذا تم حذف break، يستمر التنفيذ إلى الحالة التالية (fall-through).&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF10: حلقة for</text></name>
+    <questiontext format="html"><text>&lt;p&gt;حلقة for تستخدم عادة عندما لا نعرف عدد التكرارات مسبقاً.&lt;/p&gt;</text></questiontext>
+    <answer fraction="0"><text>true</text></answer>
+    <answer fraction="100"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF11: حلقة while</text></name>
+    <questiontext format="html"><text>&lt;p&gt;في حلقة while، يتم التحقق من الشرط قبل تنفيذ الكود.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF12: حلقة do-while</text></name>
+    <questiontext format="html"><text>&lt;p&gt;حلقة do-while تنفذ الكود مرة واحدة على الأقل حتى لو كان الشرط خطأ.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF13: المصفوفات (Arrays)</text></name>
+    <questiontext format="html"><text>&lt;p&gt;في جافا، تبدأ فهارس المصفوفة من 1 وليس من 0.&lt;/p&gt;</text></questiontext>
+    <answer fraction="0"><text>true</text></answer>
+    <answer fraction="100"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF14: خاصية length</text></name>
+    <questiontext format="html"><text>&lt;p&gt;للمصفوفة خاصية تسمى length تعطي عدد عناصرها.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF15: التحويل التلقائي (Widening)</text></name>
+    <questiontext format="html"><text>&lt;p&gt;يمكن تحويل قيمة من نوع int إلى double تلقائياً بدون فقدان البيانات.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF16: مقارنة النصوص</text></name>
+    <questiontext format="html"><text>&lt;p&gt;لمقارنة محتوى نصين (String) في جافا يجب استخدام ==.&lt;/p&gt;</text></questiontext>
+    <answer fraction="0"><text>true</text></answer>
+    <answer fraction="100"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF17: المترجم (Compiler)</text></name>
+    <questiontext format="html"><text>&lt;p&gt;مترجم جافا يحول الكود المصدري إلى بايت كود (bytecode).&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF18: الخوارزمية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;الخوارزمية هي سلسلة من الخطوات المنطقية لحل مشكلة معينة.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF19: Scanner للقراءة</text></name>
+    <questiontext format="html"><text>&lt;p&gt;لقراءة رقم صحيح من المستخدم باستخدام Scanner نستخدم nextDouble().&lt;/p&gt;</text></questiontext>
+    <answer fraction="0"><text>true</text></answer>
+    <answer fraction="100"><text>false</text></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>TF20: حلقة لا نهائية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;إذا نسينا تحديث العداد في حلقة while، قد تحدث حلقة لا نهائية.&lt;/p&gt;</text></questiontext>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>false</text></answer>
+  </question>
+
+  <!-- ===================== SECTION 2: MULTIPLE CHOICE (35 questions) ===================== -->
+  <question type="multichoice">
+    <name><text>MC1: ما هو المطلوب لتشغيل برنامج جافا؟</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما الذي يجب تثبيته على الحاسوب لتشغيل برامج جافا؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="100"><text>Java Runtime Environment (JRE)</text></answer>
+    <answer fraction="0"><text>Java Development Kit (JDK) فقط</text></answer>
+    <answer fraction="0"><text>NetBeans فقط</text></answer>
+    <answer fraction="0"><text>Microsoft Visual Studio</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC2: نوع البيانات المناسب للرقم 3.14</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي من الأنواع التالية هو الأنسب لتخزين القيمة 3.14؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>int</text></answer>
+    <answer fraction="100"><text>double</text></answer>
+    <answer fraction="0"><text>char</text></answer>
+    <answer fraction="0"><text>boolean</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC3: إعلان متغير نصي</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي من العبارات التالية صحيحة لتعريف متغير نصي باسم "name" يحوي "أحمد"؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>String name = 'أحمد';</text></answer>
+    <answer fraction="100"><text>String name = "أحمد";</text></answer>
+    <answer fraction="0"><text>string name = "أحمد";</text></answer>
+    <answer fraction="0"><text>String name = أحمد;</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC4: ناتج العملية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما هو ناتج تنفيذ العبارة التالية؟ System.out.println(10 / 3);&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>3.3333</text></answer>
+    <answer fraction="100"><text>3</text></answer>
+    <answer fraction="0"><text>3.0</text></answer>
+    <answer fraction="0"><text>4</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC5: معامل الباقي</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما ناتج العملية 17 % 5؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>3.4</text></answer>
+    <answer fraction="100"><text>2</text></answer>
+    <answer fraction="0"><text>3</text></answer>
+    <answer fraction="0"><text>5</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC6: ترتيب العمليات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما ناتج التعبير: 2 + 3 * 4؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>20</text></answer>
+    <answer fraction="0"><text>24</text></answer>
+    <answer fraction="100"><text>14</text></answer>
+    <answer fraction="0"><text>9</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC7: الشرط المنطقي OR</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما نتيجة الشرط (5 &gt; 3) || (2 &gt; 5)؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>false</text></answer>
+    <answer fraction="100"><text>true</text></answer>
+    <answer fraction="0"><text>خطأ في الترجمة</text></answer>
+    <answer fraction="0"><text>لا شيء مما سبق</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC8: جملة if</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي من العبارات التالية تستخدم للتحقق إذا كان المتغير x يساوي 10؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>if (x = 10)</text></answer>
+    <answer fraction="100"><text>if (x == 10)</text></answer>
+    <answer fraction="0"><text>if (x != 10)</text></answer>
+    <answer fraction="0"><text>if (x equals 10)</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC9: جملة switch</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي من الأنواع يمكن استخدامه في جملة switch؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>double</text></answer>
+    <answer fraction="100"><text>int</text></answer>
+    <answer fraction="0"><text>float</text></answer>
+    <answer fraction="0"><text>boolean</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC10: حلقة for</text></name>
+    <questiontext format="html"><text>&lt;p&gt;كم مرة سيتم تنفيذ الكود داخل الحلقة التالية؟ for(int i=1; i&lt;=5; i++)&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>4</text></answer>
+    <answer fraction="100"><text>5</text></answer>
+    <answer fraction="0"><text>6</text></answer>
+    <answer fraction="0"><text>0</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC11: حلقة while</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي من الحلقات التالية تنفذ الكود مرة واحدة على الأقل حتى لو كان الشرط خطأ؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>for</text></answer>
+    <answer fraction="0"><text>while</text></answer>
+    <answer fraction="100"><text>do-while</text></answer>
+    <answer fraction="0"><text>جميعها</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC12: تعريف مصفوفة</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي من العبارات التالية يصح تعريف مصفوفة أعداد صحيحة بسعة 10؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="100"><text>int[] arr = new int[10];</text></answer>
+    <answer fraction="0"><text>int arr = new int[10];</text></answer>
+    <answer fraction="0"><text>int[] arr = new int(10);</text></answer>
+    <answer fraction="0"><text>int arr[10];</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC13: الوصول لعناصر المصفوفة</text></name>
+    <questiontext format="html"><text>&lt;p&gt;إذا كان لدينا مصفوفة int[] arr = {5, 10, 15, 20}; فما قيمة arr[2]؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>5</text></answer>
+    <answer fraction="0"><text>10</text></answer>
+    <answer fraction="100"><text>15</text></answer>
+    <answer fraction="0"><text>20</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC14: خاصية length</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما قيمة arr.length في المصفوفة int[] arr = {1,2,3}؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>2</text></answer>
+    <answer fraction="100"><text>3</text></answer>
+    <answer fraction="0"><text>4</text></answer>
+    <answer fraction="0"><text>1</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC15: التحويل القسري (Casting)</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما ناتج العبارة: int x = (int) 3.9; ؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>4</text></answer>
+    <answer fraction="100"><text>3</text></answer>
+    <answer fraction="0"><text>3.9</text></answer>
+    <answer fraction="0"><text>خطأ في الترجمة</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC16: إدخال Scanner</text></name>
+    <questiontext format="html"><text>&lt;p&gt;لقراءة سطر كامل (قد يحتوي مسافات) من المستخدم باستخدام Scanner، نستخدم:&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>next()</text></answer>
+    <answer fraction="100"><text>nextLine()</text></answer>
+    <answer fraction="0"><text>nextInt()</text></answer>
+    <answer fraction="0"><text>read()</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC17: طباعة بدون سطر جديد</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي دالة تطبع النص ولا تبدأ سطراً جديداً؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>System.out.println()</text></answer>
+    <answer fraction="100"><text>System.out.print()</text></answer>
+    <answer fraction="0"><text>System.out.printf()</text></answer>
+    <answer fraction="0"><text>System.out.write()</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC18: صعبة – مخرجات حلقة متداخلة</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما هو الناتج من الكود التالي؟ &lt;br/&gt; for(int i=1; i&lt;=2; i++){&lt;br/&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;for(int j=1; j&lt;=i; j++){&lt;br/&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;System.out.print("*");&lt;br/&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;br/&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;System.out.println();&lt;br/&gt; }&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>*&lt;br/&gt;*&lt;br/&gt;</text></answer>
+    <answer fraction="100"><text>*&lt;br/&gt;**&lt;br/&gt;</text></answer>
+    <answer fraction="0"><text>**&lt;br/&gt;**&lt;br/&gt;</text></answer>
+    <answer fraction="0"><text>*&lt;br/&gt;*&lt;br/&gt;*</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC19: صعبة – ناتج معاملات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما قيمة المتغير x بعد تنفيذ الكود التالي؟ &lt;br/&gt; int x = 5; &lt;br/&gt; x += x++ * 2; &lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>10</text></answer>
+    <answer fraction="0"><text>12</text></answer>
+    <answer fraction="0"><text>16</text></answer>
+    <answer fraction="100"><text>15</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC20: صعبة – بحث في مصفوفة</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما هو المطلوب لتعديل الكود التالي لطباعة "وجدت" إذا كان الرقم 7 موجوداً في المصفوفة؟&lt;br/&gt; int[] arr = {2,4,6,8};&lt;br/&gt; boolean found = false;&lt;br/&gt; for(int num : arr){&lt;br/&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;if(num == 7){ found = true; }&lt;br/&gt; }&lt;br/&gt; if(found) System.out.println("وجدت"); else System.out.println("لم توجد");&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>يتم طباعة "وجدت" بدون تغيير</text></answer>
+    <answer fraction="100"><text>يتم طباعة "لم توجد" لأن 7 غير موجود</text></answer>
+    <answer fraction="0"><text>يحدث خطأ في الترجمة</text></answer>
+    <answer fraction="0"><text>لا شيء مما سبق</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC21: حلقة while مع شرط</text></name>
+    <questiontext format="html"><text>&lt;p&gt;كم مرة سيتم تنفيذ الكود في الحلقة التالية؟&lt;br/&gt; int i = 5; while(i &gt; 0){ i--; }&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>4</text></answer>
+    <answer fraction="100"><text>5</text></answer>
+    <answer fraction="0"><text>6</text></answer>
+    <answer fraction="0"><text>0</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC22: نطاق المتغير</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أين يمكن الوصول إلى المتغير i المعرّف داخل حلقة for؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>في أي مكان داخل الدالة main</text></answer>
+    <answer fraction="100"><text>فقط داخل الحلقة for</text></answer>
+    <answer fraction="0"><text>في أي مكان داخل الكلاس</text></answer>
+    <answer fraction="0"><text>لا يمكن الوصول إليه إطلاقاً</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC23: تحويل النصوص إلى أرقام</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي دالة تحول النص "123" إلى عدد صحيح؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>Double.parseDouble("123")</text></answer>
+    <answer fraction="100"><text>Integer.parseInt("123")</text></answer>
+    <answer fraction="0"><text>String.toInt("123")</text></answer>
+    <answer fraction="0"><text>Int.parse("123")</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC24: التعليقات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي من التالي يمثل تعليقاً لعدة أسطر في جافا؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>// تعليق</text></answer>
+    <answer fraction="100"><text>/* تعليق */</text></answer>
+    <answer fraction="0"><text># تعليق</text></answer>
+    <answer fraction="0"><text>&lt;!-- تعليق --&gt;</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC25: دالة main</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما هو التوقيع الصحيح لدالة main في جافا؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>public static void main()</text></answer>
+    <answer fraction="0"><text>public void main(String[] args)</text></answer>
+    <answer fraction="100"><text>public static void main(String[] args)</text></answer>
+    <answer fraction="0"><text>static public void main(String args)</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC26: جملة break</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما وظيفة break في حلقة؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>تخطي التكرار الحالي</text></answer>
+    <answer fraction="100"><text>الخروج من الحلقة فوراً</text></answer>
+    <answer fraction="0"><text>إنهاء البرنامج بالكامل</text></answer>
+    <answer fraction="0"><text>الانتقال إلى التكرار التالي</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC27: continue في حلقة</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما وظيفة continue في حلقة؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="100"><text>تخطي باقي الكود في التكرار الحالي والانتقال للتكرار التالي</text></answer>
+    <answer fraction="0"><text>الخروج من الحلقة</text></answer>
+    <answer fraction="0"><text>إنهاء البرنامج</text></answer>
+    <answer fraction="0"><text>إعادة تشغيل الحلقة من البداية</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC28: مصفوفة من النصوص</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي من التالي يصح لتعريف مصفوفة نصوص؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>int[] names = new int[5];</text></answer>
+    <answer fraction="100"><text>String[] names = new String[5];</text></answer>
+    <answer fraction="0"><text>String names[] = new String(5);</text></answer>
+    <answer fraction="0"><text>char[] names = new char[5];</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC29: الخوارزميات والمخططات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما هو الشكل المستخدم في المخطط الانسيابي لتمثيل عملية اتخاذ القرار (شرط)؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>المستطيل</text></answer>
+    <answer fraction="0"><text>متوازي الأضلاع</text></answer>
+    <answer fraction="100"><text>المعين (Diamond)</text></answer>
+    <answer fraction="0"><text>البيضاوي</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC30: معامل NOT</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما نتيجة الشرط !(5 &gt; 3)؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>true</text></answer>
+    <answer fraction="100"><text>false</text></answer>
+    <answer fraction="0"><text>5</text></answer>
+    <answer fraction="0"><text>خطأ في الترجمة</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC31: المتغيرات الثابتة</text></name>
+    <questiontext format="html"><text>&lt;p&gt;كيف نعرف قيمة ثابتة لا تتغير في جافا؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>constant int MAX = 100;</text></answer>
+    <answer fraction="0"><text>static int MAX = 100;</text></answer>
+    <answer fraction="100"><text>final int MAX = 100;</text></answer>
+    <answer fraction="0"><text>const int MAX = 100;</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC32: استخدام var</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ماذا يحدث عند استخدام var x = 10; في جافا (منذ الإصدار 10)؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>خطأ في الترجمة لأن var غير معروف</text></answer>
+    <answer fraction="100"><text>يتم استنتاج أن x من النوع int</text></answer>
+    <answer fraction="0"><text>يتم إنشاء متغير من النوع Object</text></answer>
+    <answer fraction="0"><text>يتم إنشاء متغير نصي</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC33: القسمة على صفر</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ماذا يحدث عند تنفيذ System.out.println(5 / 0); ؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>يطبع Infinity</text></answer>
+    <answer fraction="0"><text>يطبع 0</text></answer>
+    <answer fraction="0"><text>لا يحدث شيء</text></answer>
+    <answer fraction="100"><text>يحدث خطأ وقت التشغيل (ArithmeticException)</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC34: تسلسل تنفيذ العمليات المنطقية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;ما هي أولوية العمليات المنطقية من الأعلى إلى الأدنى؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>|| ثم &amp;&amp; ثم !</text></answer>
+    <answer fraction="0"><text>&amp;&amp; ثم || ثم !</text></answer>
+    <answer fraction="100"><text>! ثم &amp;&amp; ثم ||</text></answer>
+    <answer fraction="0"><text>كلها متساوية</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>MC35: أي مما يلي يعتبر خطأ تركيبياً (Syntax Error)؟</text></name>
+    <questiontext format="html"><text>&lt;p&gt;أي من العبارات التالية يسبب خطأ في الترجمة؟&lt;/p&gt;</text></questiontext>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answer fraction="0"><text>int x = 10;</text></answer>
+    <answer fraction="0"><text>System.out.println("Hello");</text></answer>
+    <answer fraction="100"><text>int y = "20";</text></answer>
+    <answer fraction="0"><text>boolean flag = true;</text></answer>
+  </question>
+
+  <!-- ===================== SECTION 3: MATCHING (15 questions) ===================== -->
+  <question type="matching">
+    <name><text>MATCH1: أنواع البيانات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق نوع البيانات مع الوصف المناسب.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>int</text><answer><text>عدد صحيح (4 بايت)</text></answer></subquestion>
+    <subquestion><text>double</text><answer><text>عدد عشري دقة مزدوجة</text></answer></subquestion>
+    <subquestion><text>boolean</text><answer><text>قيمة منطقية (true/false)</text></answer></subquestion>
+    <subquestion><text>String</text><answer><text>سلسلة من الحروف (نص)</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH2: المعاملات الحسابية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق كل معامل مع وظيفته.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>+</text><answer><text>الجمع أو دمج النصوص</text></answer></subquestion>
+    <subquestion><text>-</text><answer><text>الطرح</text></answer></subquestion>
+    <subquestion><text>*</text><answer><text>الضرب</text></answer></subquestion>
+    <subquestion><text>/</text><answer><text>القسمة (عدد صحيح أو عشري)</text></answer></subquestion>
+    <subquestion><text>%</text><answer><text>باقي القسمة</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH3: المعاملات المنطقية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق المعامل المنطقي مع النتيجة المنطقية.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>true &amp;&amp; true</text><answer><text>true</text></answer></subquestion>
+    <subquestion><text>true &amp;&amp; false</text><answer><text>false</text></answer></subquestion>
+    <subquestion><text>true || false</text><answer><text>true</text></answer></subquestion>
+    <subquestion><text>!true</text><answer><text>false</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH4: هياكل التحكم</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق كل هيكل تحكم مع وصفه.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>if</text><answer><text>تنفيذ كتلة تعليمات إذا تحقق الشرط</text></answer></subquestion>
+    <subquestion><text>if-else</text><answer><text>اختيار بين كتلتين بناءً على شرط</text></answer></subquestion>
+    <subquestion><text>switch-case</text><answer><text>اختيار بين عدة حالات لقيمة متغير</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH5: الحلقات التكرارية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق الحلقة مع وصفها.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>for</text><answer><text>تستخدم عندما يكون عدد التكرارات معروفاً</text></answer></subquestion>
+    <subquestion><text>while</text><answer><text>تستخدم عندما لا نعرف عدد التكرارات والتحقق قبل التنفيذ</text></answer></subquestion>
+    <subquestion><text>do-while</text><answer><text>تنفذ مرة واحدة على الأقل ثم تتحقق من الشرط</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH6: مصفوفات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق المفهوم مع وصفه في المصفوفات.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>index</text><answer><text>رقم العنصر في المصفوفة (يبدأ من 0)</text></answer></subquestion>
+    <subquestion><text>length</text><answer><text>عدد عناصر المصفوفة</text></answer></subquestion>
+    <subquestion><text>ArrayIndexOutOfBoundsException</text><answer><text>خطأ يحدث عند الوصول إلى فهرس خارج النطاق</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH7: جمل الإدخال والإخراج</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق الدالة مع ما تقوم به.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>System.out.print()</text><answer><text>طباعة النص بدون سطر جديد</text></answer></subquestion>
+    <subquestion><text>System.out.println()</text><answer><text>طباعة النص مع الانتقال لسطر جديد</text></answer></subquestion>
+    <subquestion><text>scanner.nextInt()</text><answer><text>قراءة عدد صحيح من المستخدم</text></answer></subquestion>
+    <subquestion><text>scanner.nextLine()</text><answer><text>قراءة سطر نصي كامل من المستخدم</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH8: التحويل بين الأنواع</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق طريقة التحويل مع المثال.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>Widening (تلقائي)</text><answer><text>int x = 10; double y = x;</text></answer></subquestion>
+    <subquestion><text>Narrowing (قسري)</text><answer><text>double d = 9.9; int i = (int) d;</text></answer></subquestion>
+    <subquestion><text>تحويل نص إلى int</text><answer><text>Integer.parseInt("123")</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH9: قواعد تسمية المتغيرات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق القاعدة مع صحتها أو خطئها.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>يبدأ المتغير برقم</text><answer><text>غير مسموح</text></answer></subquestion>
+    <subquestion><text>يحتوي المتغير على شرطة سفلية _</text><answer><text>مسموح</text></answer></subquestion>
+    <subquestion><text>استخدام كلمة محجوزة (مثل int)</text><answer><text>غير مسموح</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH10: أولويات العمليات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;رتب العمليات حسب الأولوية (من الأعلى إلى الأدنى).&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>الأولى (أعلى)</text><answer><text>()</text></answer></subquestion>
+    <subquestion><text>الثانية</text><answer><text>* , / , %</text></answer></subquestion>
+    <subquestion><text>الثالثة</text><answer><text>+ , -</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH11: أخطاء البرمجة</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق نوع الخطأ مع وصفه.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>Syntax Error</text><answer><text>خطأ في قواعد اللغة (مثل نسيان ;)</text></answer></subquestion>
+    <subquestion><text>Runtime Error</text><answer><text>خطأ يحدث أثناء تنفيذ البرنامج (مثل القسمة على صفر)</text></answer></subquestion>
+    <subquestion><text>Logical Error</text><answer><text>البرنامج يعمل لكن النتيجة غير صحيحة</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH12: المخططات الانسيابية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق الشكل الهندسي في المخطط الانسيابي مع معناه.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>بيضاوي / دائرة</text><answer><text>بداية / نهاية</text></answer></subquestion>
+    <subquestion><text>مستطيل</text><answer><text>عملية (معالجة)</text></answer></subquestion>
+    <subquestion><text>متوازي أضلاع</text><answer><text>إدخال / إخراج</text></answer></subquestion>
+    <subquestion><text>معين (Diamond)</text><answer><text>اتخاذ قرار (شرط)</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH13: كلمات محجوزة</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق الكلمة المحجوزة مع استخدامها.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>class</text><answer><text>تعريف كلاس</text></answer></subquestion>
+    <subquestion><text>new</text><answer><text>إنشاء كائن جديد</text></answer></subquestion>
+    <subquestion><text>return</text><answer><text>إرجاع قيمة من دالة</text></answer></subquestion>
+    <subquestion><text>static</text><answer><text>تعريف عضو ثابت</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH14: صعبة – مخرجات الحلقات</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق مقطع الكود مع المخرجات.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>for(int i=1; i&lt;=3; i++) System.out.print(i);</text><answer><text>123</text></answer></subquestion>
+    <subquestion><text>int i=1; while(i&lt;=3){ System.out.print(i); i++; }</text><answer><text>123</text></answer></subquestion>
+    <subquestion><text>int i=3; do{ System.out.print(i); i--; }while(i&gt;0);</text><answer><text>321</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>MATCH15: مفاهيم أساسية</text></name>
+    <questiontext format="html"><text>&lt;p&gt;طابق المصطلح مع تعريفه.&lt;/p&gt;</text></questiontext>
+    <shuffleanswers>true</shuffleanswers>
+    <subquestion><text>JDK</text><answer><text>Java Development Kit (أدوات التطوير)</text></answer></subquestion>
+    <subquestion><text>JVM</text><answer><text>Java Virtual Machine (الآلة الافتراضية)</text></answer></subquestion>
+    <subquestion><text>Bytecode</text><answer><text>الكود الوسيط الذي ينفذه JVM</text></answer></subquestion>
+  </question>
+</quiz>
