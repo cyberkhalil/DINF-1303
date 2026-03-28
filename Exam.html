@@ -49,22 +49,22 @@
             padding: 20px;
             margin: 25px 0;
             border-radius: 12px;
-            direction: ltr;
-            text-align: left;
+            direction: rtl;
+            text-align: right;
         }
         .question p {
             font-weight: 600;
             margin-bottom: 12px;
             font-size: 1.05rem;
-            direction: ltr;
-            text-align: left;
+            direction: rtl;
+            text-align: right;
         }
         .radio-group {
             display: flex;
             gap: 25px;
             margin-top: 12px;
             flex-wrap: wrap;
-            direction: ltr;
+            direction: rtl;
             justify-content: flex-start;
         }
         .radio-group label {
@@ -72,7 +72,7 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            direction: ltr;
+            direction: rtl;
         }
         .matching-row {
             margin-bottom: 20px;
@@ -84,13 +84,13 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            direction: ltr;
-            text-align: left;
+            direction: rtl;
+            text-align: right;
         }
         .matching-row strong {
             min-width: 180px;
             font-weight: 600;
-            direction: ltr;
+            direction: rtl;
         }
         select {
             padding: 8px 12px;
@@ -101,7 +101,7 @@
             font-family: inherit;
             flex: 1;
             min-width: 200px;
-            direction: ltr;
+            direction: rtl;
         }
         .print-value { display: none; }
         .timer-bar {
@@ -176,8 +176,8 @@
             .container { padding: 10px; }
             .student-info-card { border: 1px solid #aaa; background: #fff; }
             .question, .question p, .radio-group, .matching-row, select {
-                direction: ltr !important;
-                text-align: left !important;
+                direction: rtl !important;
+                text-align: right !important;
             }
         }
         .button-group { display: flex; gap: 15px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
@@ -386,15 +386,20 @@
                     radioGroup.className = 'radio-group';
                     const nameAttr = `tf_${tfCounter}`;
                     radioGroup.innerHTML = `
-                        <label><input type="radio" name="${nameAttr}" value="True" id="${nameAttr}_true"> True</label>
-                        <label><input type="radio" name="${nameAttr}" value="False" id="${nameAttr}_false"> False</label>
+                        <label><input type="radio" name="${nameAttr}" value="True" id="${nameAttr}_true"> صحيح</label>
+                        <label><input type="radio" name="${nameAttr}" value="False" id="${nameAttr}_false"> خطأ</label>
                     `;
                     const printSpan = document.createElement('span');
                     printSpan.className = 'print-value';
                     printSpan.id = `${nameAttr}_print`;
                     printSpan.setAttribute('data-for', nameAttr);
                     radioGroup.querySelectorAll('input').forEach(radio => {
-                        radio.addEventListener('change', () => { if (radio.checked) printSpan.innerText = radio.value; });
+                        radio.addEventListener('change', () => {
+                            if (radio.checked) {
+                                // تحويل القيمة المخزنة إلى نص عربي للطباعة
+                                printSpan.innerText = radio.value === 'True' ? 'صحيح' : 'خطأ';
+                            }
+                        });
                     });
                     questionDiv.appendChild(radioGroup);
                     questionDiv.appendChild(printSpan);
